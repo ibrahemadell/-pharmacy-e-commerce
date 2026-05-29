@@ -1,0 +1,75 @@
+version: '3.9'
+
+services:
+
+  # ─── SQL Server ─────────────────────────────────────────────────────────────
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: pharma_sqlserver
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: "PharmaCare@2024!"
+      MSSQL_PID: Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - pharma_net
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'PharmaCare@2024!' -Q 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ─── ASP.NET API ────────────────────────────────────────────────────────────
+  api:
+    build:
+      context: ./backend/PharmacyAPI
+      dockerfile: Dockerfile
+    container_name: pharma_api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=PharmacyDB;User Id=sa;Password=PharmaCare@2024!;TrustServerCertificate=True;"
+      Jwt__Key: "YourSuperSecretKey_MustBe32CharsMinimum!!"
+      Jwt__Issuer: "PharmacareAPI"
+      Jwt__Audience: "PharmacareClient"
+      AllowedOrigins: "http://localhost:3000,http://frontend:3000"
+    ports:
+      - "5000:80"
+    volumes:
+      - api_uploads:/app/wwwroot/uploads
+      - api_logs:/app/logs
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    networks:
+      - pharma_net
+    restart: unless-stopped
+
+  # ─── Nuxt Frontend ──────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend/pharmacy-nuxt
+      dockerfile: Dockerfile
+    container_name: pharma_frontend
+    environment:
+      NUXT_PUBLIC_API_BASE: "http://api:80/api"
+      NUXT_PUBLIC_WHATSAPP: "+201000000000"
+      NUXT_PUBLIC_SITE_NAME: "PharmaCare"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    networks:
+      - pharma_net
+    restart: unless-stopped
+
+volumes:
+  sqlserver_data:
+  api_uploads:
+  api_logs:
+
+networks:
+  pharma_net:
+    driver: bridge

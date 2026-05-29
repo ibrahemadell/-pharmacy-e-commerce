@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #059669;
+    --color-primary-dark: #047857;
+    --color-primary-light: #d1fae5;
+    --color-accent: #10b981;
+    --color-surface: #ffffff;
+    --color-surface-alt: #f0fdf4;
+    --color-text: #111827;
+    --color-text-muted: #6b7280;
+    --color-border: #e5e7eb;
+    --font-display: 'DM Serif Display', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .dark {
+    --color-surface: #0f172a;
+    --color-surface-alt: #1e293b;
+    --color-text: #f1f5f9;
+    --color-text-muted: #94a3b8;
+    --color-border: #334155;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-surface);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 
+           text-white font-semibold rounded-xl transition-all duration-200 
+           active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed shadow-sm;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-emerald-600 
+           text-emerald-700 hover:bg-emerald-50 font-semibold rounded-xl transition-all duration-200
+           dark:text-emerald-400 dark:hover:bg-emerald-950;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-gray-600 
+           hover:bg-gray-100 font-medium rounded-xl transition-all duration-200
+           dark:text-gray-300 dark:hover:bg-gray-800;
+  }
+  .card {
+    @apply bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 
+           shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-slate-600 
+           bg-white dark:bg-slate-700 text-gray-900 dark:text-white
+           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 
+           focus:border-transparent transition-all duration-200;
+  }
+  .badge-rx {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 bg-orange-100 text-orange-700 
+           text-xs font-semibold rounded-full;
+  }
+  .badge-discount {
+    @apply inline-flex items-center px-2 py-0.5 bg-red-500 text-white text-xs font-bold rounded-full;
+  }
+  .badge-low-stock {
+    @apply inline-flex items-center px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full;
+  }
+  .skeleton {
+    @apply animate-pulse bg-gray-200 dark:bg-slate-700 rounded;
+  }
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold text-gray-900 dark:text-white;
+  }
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .whatsapp-btn {
+    @apply fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 
+           text-white rounded-full shadow-lg flex items-center justify-center 
+           transition-all duration-200 hover:scale-110;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #059669; border-radius: 3px; }
+
+/* Toast overrides */
+.toast-container { font-family: var(--font-body) !important; }
+
+/* Loading bar */
+#nprogress .bar { background: #059669 !important; }
+#nprogress .peg { box-shadow: 0 0 10px #059669, 0 0 5px #059669 !important; }

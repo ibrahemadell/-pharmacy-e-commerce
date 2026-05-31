@@ -20,6 +20,7 @@
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.15",
     "@vueuse/nuxt": "^11.1.0",
+    "ipx": "^3.1.1",
     "nuxt": "^3.13.0",
     "nuxt-icon": "^0.6.10",
     "pinia": "^2.2.2",

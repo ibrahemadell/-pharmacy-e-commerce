@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     families: {
       'Plus+Jakarta+Sans': [300, 400, 500, 600, 700, 800],
       'DM+Serif+Display': [400],
+      'Cairo': [300, 400, 500, 600, 700, 800],
     },
     display: 'swap',
   },

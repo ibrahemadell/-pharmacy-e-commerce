@@ -20,10 +20,17 @@
           <div class="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 p-5">
             <h2 class="font-bold text-gray-900 dark:text-white mb-4">Basic Information</h2>
             <div class="space-y-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Product Name *</label>
-                <input v-model="form.name" required type="text" placeholder="e.g. Panadol Extra 500mg"
-                  class="input-field" />
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ t('admin.name_en') }}</label>
+                  <input v-model="form.name" required type="text" placeholder="e.g. Panadol Extra 500mg"
+                    class="input-field" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ t('admin.name_ar') }}</label>
+                  <input v-model="form.nameAr" type="text" placeholder="مثال: بنادول اكسترا 500 ملغ"
+                    class="input-field text-right" dir="rtl" />
+                </div>
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div>
@@ -48,15 +55,29 @@
                   <input v-model="form.unit" type="text" placeholder="e.g. mg, ml, tablet" class="input-field" />
                 </div>
               </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Short Description</label>
-                <input v-model="form.shortDescription" type="text" placeholder="Brief product summary (shown on cards)"
-                  class="input-field" maxlength="500" />
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ t('admin.short_desc_en') }}</label>
+                  <input v-model="form.shortDescription" type="text" placeholder="Brief summary (EN)"
+                    class="input-field" maxlength="500" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ t('admin.short_desc_ar') }}</label>
+                  <input v-model="form.shortDescriptionAr" type="text" placeholder="ملخص قصير (عربي)"
+                    class="input-field text-right" dir="rtl" maxlength="500" />
+                </div>
               </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Full Description</label>
-                <textarea v-model="form.description" rows="5" placeholder="Detailed product description..."
-                  class="input-field resize-none" />
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ t('admin.desc_en') }}</label>
+                  <textarea v-model="form.description" rows="4" placeholder="Detailed description (EN)..."
+                    class="input-field resize-none" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ t('admin.desc_ar') }}</label>
+                  <textarea v-model="form.descriptionAr" rows="4" placeholder="الوصف التفصيلي (عربي)..."
+                    class="input-field resize-none text-right" dir="rtl" />
+                </div>
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Barcode</label>
@@ -224,6 +245,7 @@ const router = useRouter()
 const api = useApi()
 const fmt = useFormatters()
 const { showToast } = useToast()
+const { t } = useI18n()
 
 const productId = route.params.id as string
 const isEdit = computed(() => !!productId && productId !== 'new')
@@ -234,8 +256,8 @@ const categories = ref<Category[]>([])
 const newImageUrl = ref('')
 
 const form = reactive({
-  name: '', categoryId: '' as any, brand: '', manufacturer: '', unit: '',
-  shortDescription: '', description: '', barcode: '', price: 0, discountPrice: undefined as number | undefined,
+  name: '', nameAr: '', categoryId: '' as any, brand: '', manufacturer: '', unit: '',
+  shortDescription: '', shortDescriptionAr: '', description: '', descriptionAr: '', barcode: '', price: 0, discountPrice: undefined as number | undefined,
   stockQuantity: 0, lowStockThreshold: 10, expiryDate: '',
   isActive: true, isFeatured: false, isBestSeller: false,
   isPrescriptionRequired: false, isAvailableOnWhatsApp: false,
@@ -281,9 +303,10 @@ onMounted(async () => {
     if (res.success && res.data) {
       const p = res.data
       Object.assign(form, {
-        name: p.name, categoryId: p.categoryId, brand: p.brand || '',
+        name: p.name, nameAr: p.nameAr || '', categoryId: p.categoryId, brand: p.brand || '',
         manufacturer: p.manufacturer || '', unit: p.unit || '',
-        shortDescription: p.shortDescription || '', description: p.description || '',
+        shortDescription: p.shortDescription || '', shortDescriptionAr: p.shortDescriptionAr || '',
+        description: p.description || '', descriptionAr: p.descriptionAr || '',
         barcode: p.barcode || '', price: p.price, discountPrice: p.discountPrice,
         stockQuantity: p.stockQuantity, lowStockThreshold: 10,
         expiryDate: p.expiryDate ? p.expiryDate.split('T')[0] : '',

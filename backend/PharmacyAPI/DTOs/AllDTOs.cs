@@ -62,6 +62,7 @@ public class CategoryDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";
+    public string? NameAr { get; set; }
     public string Slug { get; set; } = "";
     public string? Description { get; set; }
     public string? ImageUrl { get; set; }
@@ -76,6 +77,7 @@ public class CategoryDto
 public class CreateCategoryRequest
 {
     [Required, MaxLength(100)] public string Name { get; set; } = "";
+    [MaxLength(100)] public string? NameAr { get; set; }
     [MaxLength(500)] public string? Description { get; set; }
     public string? ImageUrl { get; set; }
     public int? ParentId { get; set; }
@@ -91,10 +93,13 @@ public class ProductDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";
+    public string? NameAr { get; set; }
     public string Slug { get; set; } = "";
     public string? Barcode { get; set; }
     public string? Description { get; set; }
+    public string? DescriptionAr { get; set; }
     public string? ShortDescription { get; set; }
+    public string? ShortDescriptionAr { get; set; }
     public decimal Price { get; set; }
     public decimal? DiscountPrice { get; set; }
     public int DiscountPercent { get; set; }
@@ -126,6 +131,7 @@ public class ProductListDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";
+    public string? NameAr { get; set; }
     public string Slug { get; set; } = "";
     public decimal Price { get; set; }
     public decimal? DiscountPrice { get; set; }
@@ -164,9 +170,12 @@ public class ProductVariantDto
 public class CreateProductRequest
 {
     [Required, MaxLength(200)] public string Name { get; set; } = "";
+    [MaxLength(200)] public string? NameAr { get; set; }
     [MaxLength(100)] public string? Barcode { get; set; }
     [MaxLength(2000)] public string? Description { get; set; }
+    [MaxLength(2000)] public string? DescriptionAr { get; set; }
     [MaxLength(500)] public string? ShortDescription { get; set; }
+    [MaxLength(500)] public string? ShortDescriptionAr { get; set; }
     [Required, Range(0, double.MaxValue)] public decimal Price { get; set; }
     public decimal? DiscountPrice { get; set; }
     [Required] public int CategoryId { get; set; }

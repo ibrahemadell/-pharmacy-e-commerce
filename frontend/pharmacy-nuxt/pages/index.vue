@@ -4,32 +4,32 @@
     <section class="relative overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800">
       <!-- Decorative circles -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-20 -right-20 w-96 h-96 bg-white/5 rounded-full"></div>
-        <div class="absolute -bottom-32 -left-16 w-80 h-80 bg-white/5 rounded-full"></div>
+        <div class="absolute -top-20 -end-20 w-96 h-96 bg-white/5 rounded-full"></div>
+        <div class="absolute -bottom-32 -start-16 w-80 h-80 bg-white/5 rounded-full"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.02] rounded-full"></div>
       </div>
 
       <div class="page-container relative">
         <div class="flex flex-col md:flex-row items-center gap-8 py-16 md:py-20">
-          <div class="flex-1 text-white text-center md:text-left">
+          <div class="flex-1 text-white text-center md:text-start">
             <div class="inline-flex items-center gap-2 bg-white/15 text-white text-sm font-medium px-4 py-1.5 rounded-full mb-5">
               <Icon name="heroicons:sparkles" class="w-4 h-4" />
-              Trusted Pharmacy Since 2015
+              {{ t('home.hero_badge') }}
             </div>
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5"
               style="font-family: var(--font-display)">
-              Your Health,<br /><span class="text-emerald-200">Our Priority</span>
+              {{ t('home.hero_title_1') }}<br /><span class="text-emerald-200">{{ t('home.hero_title_2') }}</span>
             </h1>
             <p class="text-emerald-100 text-lg max-w-xl mb-8 leading-relaxed">
-              Quality medicines, vitamins & health products delivered to your door. Prescription handling made easy.
+              {{ t('home.hero_subtitle') }}
             </p>
             <div class="flex flex-wrap gap-3 justify-center md:justify-start">
               <NuxtLink to="/products" class="bg-white text-emerald-700 hover:bg-emerald-50 font-bold px-7 py-3.5 rounded-xl transition-colors shadow-lg inline-flex items-center gap-2">
-                <Icon name="heroicons:shopping-bag" class="w-5 h-5" /> Shop Now
+                <Icon name="heroicons:shopping-bag" class="w-5 h-5" /> {{ t('home.shop_now') }}
               </NuxtLink>
               <a :href="waLink" target="_blank"
                 class="bg-green-500 hover:bg-green-400 text-white font-bold px-7 py-3.5 rounded-xl transition-colors shadow-lg inline-flex items-center gap-2">
-                <Icon name="mdi:whatsapp" class="w-5 h-5" /> Order via WhatsApp
+                <Icon name="mdi:whatsapp" class="w-5 h-5" /> {{ t('home.order_whatsapp') }}
               </a>
             </div>
 
@@ -59,7 +59,7 @@
             <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900 rounded-xl flex items-center justify-center group-hover:bg-emerald-600 transition-colors">
               <Icon name="mdi:pill" class="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors" />
             </div>
-            <span class="text-xs font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">{{ cat.name }}</span>
+            <span class="text-xs font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">{{ isAr ? (cat.nameAr || cat.name) : cat.name }}</span>
           </NuxtLink>
         </div>
       </div>
@@ -70,11 +70,11 @@
       <div class="page-container">
         <div class="flex items-center justify-between mb-8">
           <div>
-            <p class="text-sm font-semibold text-emerald-600 mb-1">Handpicked for you</p>
-            <h2 class="section-title">Featured Products</h2>
+            <p class="text-sm font-semibold text-emerald-600 mb-1">{{ t('home.handpicked') }}</p>
+            <h2 class="section-title">{{ t('home.featured_products') }}</h2>
           </div>
           <NuxtLink to="/products?isFeatured=true" class="btn-secondary text-sm hidden sm:flex">
-            View All <Icon name="heroicons:arrow-right" class="w-4 h-4" />
+            {{ t('home.view_all') }} <Icon name="heroicons:arrow-right" class="w-4 h-4" :class="isAr ? 'rotate-180' : ''" />
           </NuxtLink>
         </div>
 
@@ -92,9 +92,9 @@
       <div class="page-container">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6 bg-white dark:bg-slate-800 rounded-3xl p-6 md:p-8 shadow-sm border border-orange-100 dark:border-orange-900">
           <div>
-            <span class="text-orange-500 font-bold text-sm uppercase tracking-wider">Limited Time Offers</span>
-            <h3 class="text-2xl md:text-3xl font-bold mt-1 text-gray-900 dark:text-white">Up to <span class="text-red-500">50% OFF</span></h3>
-            <p class="text-gray-500 mt-1 text-sm">On selected health & wellness products</p>
+            <span class="text-orange-500 font-bold text-sm uppercase tracking-wider">{{ t('home.limited_offers') }}</span>
+            <h3 class="text-2xl md:text-3xl font-bold mt-1 text-gray-900 dark:text-white">{{ t('home.up_to') }} <span class="text-red-500">50% {{ t('home.off') }}</span></h3>
+            <p class="text-gray-500 mt-1 text-sm">{{ t('home.selected_wellness') }}</p>
           </div>
           <div class="flex items-center gap-4 flex-shrink-0">
             <div v-for="c in countdown" :key="c.label" class="text-center">
@@ -105,7 +105,7 @@
             </div>
           </div>
           <NuxtLink to="/products?hasDiscount=true" class="btn-primary whitespace-nowrap">
-            Shop Offers <Icon name="heroicons:arrow-right" class="w-4 h-4" />
+            {{ t('home.shop_offers') }} <Icon name="heroicons:arrow-right" class="w-4 h-4" :class="isAr ? 'rotate-180' : ''" />
           </NuxtLink>
         </div>
       </div>
@@ -116,11 +116,11 @@
       <div class="page-container">
         <div class="flex items-center justify-between mb-8">
           <div>
-            <p class="text-sm font-semibold text-red-500 mb-1">Don't miss out</p>
-            <h2 class="section-title">Today's Offers</h2>
+            <p class="text-sm font-semibold text-red-500 mb-1">{{ t('home.dont_miss') }}</p>
+            <h2 class="section-title">{{ t('home.todays_offers') }}</h2>
           </div>
           <NuxtLink to="/products?hasDiscount=true" class="btn-secondary text-sm hidden sm:flex">
-            All Offers <Icon name="heroicons:arrow-right" class="w-4 h-4" />
+            {{ t('home.all_offers') }} <Icon name="heroicons:arrow-right" class="w-4 h-4" :class="isAr ? 'rotate-180' : ''" />
           </NuxtLink>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -137,11 +137,11 @@
       <div class="page-container">
         <div class="flex items-center justify-between mb-8">
           <div>
-            <p class="text-sm font-semibold text-amber-600 mb-1">Most popular</p>
-            <h2 class="section-title">Best Sellers</h2>
+            <p class="text-sm font-semibold text-amber-600 mb-1">{{ t('home.most_popular') }}</p>
+            <h2 class="section-title">{{ t('home.best_sellers') }}</h2>
           </div>
           <NuxtLink to="/products?isBestSeller=true" class="btn-secondary text-sm hidden sm:flex">
-            See All <Icon name="heroicons:arrow-right" class="w-4 h-4" />
+            {{ t('home.view_all') }} <Icon name="heroicons:arrow-right" class="w-4 h-4" :class="isAr ? 'rotate-180' : ''" />
           </NuxtLink>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -163,14 +163,14 @@
           </div>
           <div class="relative">
             <Icon name="mdi:whatsapp" class="w-16 h-16 mx-auto mb-4 text-green-200" />
-            <h2 class="text-3xl md:text-4xl font-bold mb-3">Need a Prescription Filled?</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">{{ t('home.need_prescription') }}</h2>
             <p class="text-green-100 text-lg max-w-xl mx-auto mb-8">
-              Send us your prescription on WhatsApp and our pharmacist will assist you within minutes.
+              {{ t('home.prescription_desc') }}
             </p>
             <a :href="waLink" target="_blank"
               class="inline-flex items-center gap-2.5 bg-white text-green-700 font-bold px-8 py-4 rounded-xl hover:bg-green-50 transition-colors shadow-lg text-lg">
               <Icon name="mdi:whatsapp" class="w-6 h-6" />
-              Chat with Our Pharmacist
+              {{ t('home.chat_pharmacist') }}
             </a>
           </div>
         </div>
@@ -197,12 +197,14 @@
 <script setup lang="ts">
 import type { ProductListItem, Category } from '~/types'
 
-useHead({ title: 'PharmaCare - Your Trusted Online Pharmacy' })
+const { t, locale, isAr } = useI18n()
+
+useHead({ title: computed(() => isAr.value ? 'صيدلية فارماكير - صيدليتك الموثوقة' : 'PharmaCare - Your Trusted Online Pharmacy') })
 
 const api = useApi()
 const fmt = useFormatters()
 const config = useRuntimeConfig()
-const waLink = computed(() => fmt.whatsappLink(config.public.whatsappNumber, 'Hi! I need pharmacy assistance.'))
+const waLink = computed(() => fmt.whatsappLink(config.public.whatsappNumber, isAr.value ? 'مرحباً! أود طلب المساعدة الطبية.' : 'Hi! I need pharmacy assistance.'))
 
 const featured = ref<ProductListItem[]>([])
 const bestSellers = ref<ProductListItem[]>([])
@@ -212,32 +214,31 @@ const loadingFeatured = ref(true)
 const loadingBest = ref(true)
 const loadingOffers = ref(true)
 
-const badges = [
-  { icon: 'heroicons:shield-check', label: 'Licensed Pharmacy' },
-  { icon: 'heroicons:truck', label: 'Fast Delivery' },
-  { icon: 'heroicons:lock-closed', label: 'Secure Payment' },
-]
+const badges = computed(() => [
+  { icon: 'heroicons:shield-check', label: t('home.licensed_pharmacy') },
+  { icon: 'heroicons:truck', label: t('home.fast_delivery') },
+  { icon: 'heroicons:lock-closed', label: t('home.secure_payment') },
+])
 
-const features = [
-  { icon: 'heroicons:truck', title: 'Fast Delivery', desc: 'Same day delivery in Cairo' },
-  { icon: 'heroicons:shield-check', title: 'Authentic Products', desc: '100% genuine medicines' },
-  { icon: 'heroicons:chat-bubble-left-right', title: '24/7 Support', desc: 'Pharmacist always available' },
-  { icon: 'heroicons:arrow-uturn-left', title: 'Easy Returns', desc: '7-day hassle-free returns' },
-]
+const features = computed(() => [
+  { icon: 'heroicons:truck', title: t('home.fast_delivery_title'), desc: t('home.fast_delivery_desc') },
+  { icon: 'heroicons:shield-check', title: t('home.authentic_products_title'), desc: t('home.authentic_products_desc') },
+  { icon: 'heroicons:chat-bubble-left-right', title: t('home.support_title'), desc: t('home.support_desc') },
+  { icon: 'heroicons:arrow-uturn-left', title: t('home.returns_title'), desc: t('home.returns_desc') },
+])
 
-// Countdown timer
-const countdown = ref([
-  { label: 'Hrs', value: '08' }, { label: 'Min', value: '45' }, { label: 'Sec', value: '22' }
+// Countdown timer state
+const secondsLeft = ref(8 * 3600 + 45 * 60 + 22)
+const countdown = computed(() => [
+  { label: isAr.value ? 'ساعة' : 'Hrs', value: String(Math.floor(secondsLeft.value / 3600)).padStart(2, '0') },
+  { label: isAr.value ? 'دقيقة' : 'Min', value: String(Math.floor((secondsLeft.value % 3600) / 60)).padStart(2, '0') },
+  { label: isAr.value ? 'ثانية' : 'Sec', value: String(secondsLeft.value % 60).padStart(2, '0') }
 ])
 
 let timer: ReturnType<typeof setInterval>
 onMounted(() => {
-  let seconds = 8 * 3600 + 45 * 60 + 22
   timer = setInterval(() => {
-    seconds = Math.max(0, seconds - 1)
-    countdown.value[0].value = String(Math.floor(seconds / 3600)).padStart(2, '0')
-    countdown.value[1].value = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0')
-    countdown.value[2].value = String(seconds % 60).padStart(2, '0')
+    secondsLeft.value = Math.max(0, secondsLeft.value - 1)
   }, 1000)
 })
 onUnmounted(() => clearInterval(timer))

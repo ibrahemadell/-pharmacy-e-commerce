@@ -3,11 +3,11 @@
     <!-- Header -->
     <div class="flex flex-wrap items-center justify-between gap-4 mb-7">
       <div>
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Products</h1>
-        <p class="text-sm text-gray-500 mt-0.5">{{ pagedResult?.totalCount ?? 0 }} total products</p>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ t('admin.products') }}</h1>
+        <p class="text-sm text-gray-500 mt-0.5">{{ pagedResult?.totalCount ?? 0 }} {{ isAr ? 'منتج إجمالاً' : 'total products' }}</p>
       </div>
       <NuxtLink to="/admin/products/new" class="btn-primary">
-        <Icon name="heroicons:plus" class="w-4 h-4" /> Add Product
+        <Icon name="heroicons:plus" class="w-4 h-4" /> {{ t('admin.add_product') }}
       </NuxtLink>
     </div>
 
@@ -16,21 +16,22 @@
       <div class="flex flex-wrap gap-3">
         <div class="relative flex-1 min-w-[200px]">
           <Icon name="heroicons:magnifying-glass" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input v-model="search" @input="debouncedFetch" type="text" placeholder="Search products..."
+          <input v-model="search" @input="debouncedFetch" type="text"
+            :placeholder="isAr ? 'ابحث عن منتج...' : 'Search products...'"
             class="input-field pl-9 py-2 text-sm" />
         </div>
         <select v-model="categoryFilter" @change="fetchProducts" class="input-field py-2 text-sm w-44">
-          <option value="">All Categories</option>
+          <option value="">{{ isAr ? 'كل الأقسام' : 'All Categories' }}</option>
           <option v-for="c in categories" :key="c.id" :value="c.id">{{ c.name }}</option>
         </select>
         <select v-model="stockFilter" @change="fetchProducts" class="input-field py-2 text-sm w-40">
-          <option value="">All Stock</option>
-          <option value="low">Low Stock</option>
-          <option value="out">Out of Stock</option>
-          <option value="in">In Stock</option>
+          <option value="">{{ isAr ? 'كل المخزون' : 'All Stock' }}</option>
+          <option value="low">{{ isAr ? 'مخزون منخفض' : 'Low Stock' }}</option>
+          <option value="out">{{ isAr ? 'نفذت الكمية' : 'Out of Stock' }}</option>
+          <option value="in">{{ isAr ? 'متوفر' : 'In Stock' }}</option>
         </select>
         <button @click="clearFilters" class="btn-ghost text-sm px-3 py-2">
-          <Icon name="heroicons:x-mark" class="w-4 h-4" /> Clear
+          <Icon name="heroicons:x-mark" class="w-4 h-4" /> {{ isAr ? 'مسح' : 'Clear' }}
         </button>
       </div>
     </div>
@@ -44,12 +45,12 @@
               <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider w-10">
                 <input type="checkbox" @change="toggleSelectAll" class="accent-emerald-600 w-4 h-4" />
               </th>
-              <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Product</th>
-              <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">Category</th>
-              <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Price</th>
-              <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">Stock</th>
-              <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">Status</th>
-              <th class="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+              <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ isAr ? 'المنتج' : 'Product' }}</th>
+              <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">{{ isAr ? 'القسم' : 'Category' }}</th>
+              <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ isAr ? 'السعر' : 'Price' }}</th>
+              <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">{{ isAr ? 'المخزون' : 'Stock' }}</th>
+              <th class="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">{{ isAr ? 'الحالة' : 'Status' }}</th>
+              <th class="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ isAr ? 'الإجراءات' : 'Actions' }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-50 dark:divide-slate-700/50">
@@ -73,9 +74,9 @@
                     <div class="min-w-0">
                       <p class="text-sm font-semibold text-gray-900 dark:text-white truncate max-w-[200px]">{{ p.name }}</p>
                       <div class="flex items-center gap-1.5 mt-0.5">
-                        <span v-if="p.isPrescriptionRequired" class="badge-rx text-xs">Rx</span>
-                        <span v-if="p.isFeatured" class="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full font-semibold">Featured</span>
-                        <span v-if="p.isBestSeller" class="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-semibold">Best Seller</span>
+                        <span v-if="p.isPrescriptionRequired" class="badge-rx text-xs">{{ isAr ? 'روشتة' : 'Rx' }}</span>
+                        <span v-if="p.isFeatured" class="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full font-semibold">{{ isAr ? 'مميز' : 'Featured' }}</span>
+                        <span v-if="p.isBestSeller" class="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-semibold">{{ isAr ? 'الأكثر مبيعاً' : 'Best Seller' }}</span>
                       </div>
                     </div>
                   </div>
@@ -99,21 +100,21 @@
                 <td class="px-4 py-3.5 hidden lg:table-cell">
                   <span :class="p.isOutOfStock ? 'bg-red-100 text-red-700' : p.isLowStock ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'"
                     class="text-xs px-2 py-0.5 rounded-full font-semibold">
-                    {{ p.isOutOfStock ? 'Out of Stock' : p.isLowStock ? 'Low Stock' : 'In Stock' }}
+                    {{ p.isOutOfStock ? t('product.out_of_stock') : p.isLowStock ? t('product.low_stock') : t('product.in_stock') }}
                   </span>
                 </td>
                 <td class="px-4 py-3.5">
                   <div class="flex items-center justify-end gap-1">
                     <NuxtLink :to="`/products/${p.slug}`" target="_blank"
-                      class="p-1.5 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950 rounded-lg transition-colors" title="View">
+                      class="p-1.5 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950 rounded-lg transition-colors" :title="isAr ? 'عرض' : 'View'">
                       <Icon name="heroicons:eye" class="w-4 h-4" />
                     </NuxtLink>
                     <NuxtLink :to="`/admin/products/${p.id}/edit`"
-                      class="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950 rounded-lg transition-colors" title="Edit">
+                      class="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950 rounded-lg transition-colors" :title="isAr ? 'تعديل' : 'Edit'">
                       <Icon name="heroicons:pencil" class="w-4 h-4" />
                     </NuxtLink>
                     <button @click="confirmDelete(p)"
-                      class="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950 rounded-lg transition-colors" title="Delete">
+                      class="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950 rounded-lg transition-colors" :title="isAr ? 'حذف' : 'Delete'">
                       <Icon name="heroicons:trash" class="w-4 h-4" />
                     </button>
                   </div>
@@ -121,7 +122,7 @@
               </tr>
               <tr v-if="!products.length">
                 <td colspan="7" class="px-4 py-12 text-center text-gray-400 text-sm">
-                  No products found
+                  {{ isAr ? 'لا توجد منتجات' : 'No products found' }}
                 </td>
               </tr>
             </template>
@@ -132,8 +133,8 @@
       <!-- Pagination -->
       <div class="flex items-center justify-between px-4 py-3.5 border-t border-gray-100 dark:border-slate-700">
         <p class="text-sm text-gray-500">
-          Showing {{ ((currentPage - 1) * pageSize) + 1 }}–{{ Math.min(currentPage * pageSize, pagedResult?.totalCount ?? 0) }}
-          of {{ pagedResult?.totalCount ?? 0 }}
+          {{ isAr ? 'عرض' : 'Showing' }} {{ ((currentPage - 1) * pageSize) + 1 }}–{{ Math.min(currentPage * pageSize, pagedResult?.totalCount ?? 0) }}
+          {{ isAr ? 'من' : 'of' }} {{ pagedResult?.totalCount ?? 0 }}
         </p>
         <div class="flex items-center gap-1">
           <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1"
@@ -156,14 +157,19 @@
           <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mb-4">
             <Icon name="heroicons:trash" class="w-6 h-6 text-red-600" />
           </div>
-          <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">Delete Product</h3>
-          <p class="text-sm text-gray-500 mb-6">Are you sure you want to delete <strong>{{ deleteTarget.name }}</strong>? This action cannot be undone.</p>
+          <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">{{ t('admin.confirm_delete_title') }}</h3>
+          <p class="text-sm text-gray-500 mb-6">
+            {{ isAr
+              ? `هل أنت متأكد من حذف المنتج "${deleteTarget.name}"؟ لا يمكن التراجع.`
+              : `Are you sure you want to delete "${deleteTarget.name}"? This action cannot be undone.`
+            }}
+          </p>
           <div class="flex gap-3">
-            <button @click="deleteTarget = null" class="btn-ghost flex-1 justify-center">Cancel</button>
+            <button @click="deleteTarget = null" class="btn-ghost flex-1 justify-center">{{ t('admin.cancel') }}</button>
             <button @click="deleteProduct" :disabled="deleting"
               class="flex-1 justify-center inline-flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl transition-colors">
               <Icon v-if="deleting" name="svg-spinners:ring-resize" class="w-4 h-4" />
-              Delete
+              {{ t('admin.delete') }}
             </button>
           </div>
         </div>
@@ -182,6 +188,7 @@ useHead({ title: 'Products - Admin' })
 const api = useApi()
 const fmt = useFormatters()
 const { showToast } = useToast()
+const { t, isAr } = useI18n()
 
 const products = ref<ProductListItem[]>([])
 const pagedResult = ref<PagedResult<ProductListItem> | null>(null)
@@ -224,11 +231,11 @@ const deleteProduct = async () => {
   const res = await api.products.delete(deleteTarget.value.id)
   deleting.value = false
   if (res.success) {
-    showToast('Product deleted', 'success')
+    showToast(isAr.value ? 'تم حذف المنتج' : 'Product deleted', 'success')
     deleteTarget.value = null
     fetchProducts()
   } else {
-    showToast(res.message || 'Failed to delete', 'error')
+    showToast(res.message || (isAr.value ? 'فشل الحذف' : 'Failed to delete'), 'error')
   }
 }
 

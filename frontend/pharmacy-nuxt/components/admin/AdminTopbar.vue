@@ -18,6 +18,13 @@
     </div>
 
     <div class="flex items-center gap-3">
+      <!-- Language switch -->
+      <button @click="setLocale(locale === 'en' ? 'ar' : 'en')"
+        class="btn-ghost p-2 flex items-center gap-1 text-sm font-semibold">
+        <Icon name="heroicons:language" class="w-5 h-5" />
+        <span>{{ locale === 'en' ? 'عربي' : 'EN' }}</span>
+      </button>
+
       <!-- Dark mode -->
       <button @click="toggleDark()" class="btn-ghost p-2">
         <Icon :name="isDark ? 'heroicons:sun' : 'heroicons:moon'" class="w-5 h-5" />
@@ -50,6 +57,7 @@ defineEmits(['toggle-sidebar'])
 const authStore = useAuthStore()
 const route = useRoute()
 const colorMode = useColorMode()
+const { locale, t, setLocale } = useI18n()
 const isDark = computed(() => colorMode.value === 'dark')
 const toggleDark = () => { colorMode.preference = isDark.value ? 'light' : 'dark' }
 

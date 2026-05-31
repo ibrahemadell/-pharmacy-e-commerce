@@ -1,6 +1,6 @@
 <template>
-  <div class="page-container py-8 max-w-5xl">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">Checkout</h1>
+  <div class="page-container py-8 max-w-5xl" :dir="dir">
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">{{ t('checkout.title') }}</h1>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Left: Form -->
@@ -10,7 +10,7 @@
         <div class="card p-6">
           <h2 class="font-bold text-lg text-gray-900 dark:text-white mb-5 flex items-center gap-2">
             <span class="w-7 h-7 bg-emerald-600 text-white rounded-full text-sm flex items-center justify-center font-bold">1</span>
-            Delivery Address
+            {{ t('checkout.shipping_address') }}
           </h2>
 
           <div v-if="addresses.length" class="space-y-3 mb-4">
@@ -21,7 +21,7 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2 mb-0.5">
                   <span class="font-semibold text-sm">{{ addr.label }}</span>
-                  <span v-if="addr.isDefault" class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">Default</span>
+                  <span v-if="addr.isDefault" class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">{{ isAr ? 'افتراضي' : 'Default' }}</span>
                 </div>
                 <p class="text-sm text-gray-600 dark:text-gray-400">{{ addr.fullName }} · {{ addr.phoneNumber }}</p>
                 <p class="text-sm text-gray-500">{{ addr.addressLine1 }}, {{ addr.city }}, {{ addr.governorate }}</p>
@@ -32,27 +32,27 @@
           <!-- Add new address form toggle -->
           <button @click="showAddressForm = !showAddressForm" class="btn-secondary text-sm">
             <Icon name="heroicons:plus" class="w-4 h-4" />
-            {{ showAddressForm ? 'Cancel' : 'Add New Address' }}
+            {{ showAddressForm ? t('admin.cancel') : t('checkout.new_address') }}
           </button>
 
           <div v-if="showAddressForm" class="mt-4 p-4 bg-gray-50 dark:bg-slate-800 rounded-xl space-y-3">
             <div class="grid grid-cols-2 gap-3">
-              <input v-model="newAddr.fullName" placeholder="Full Name *" class="input-field text-sm" required />
-              <input v-model="newAddr.phoneNumber" placeholder="Phone *" class="input-field text-sm" required />
+              <input v-model="newAddr.fullName" :placeholder="isAr ? 'الاسم الكامل *' : 'Full Name *'" class="input-field text-sm" required />
+              <input v-model="newAddr.phoneNumber" :placeholder="isAr ? 'رقم الهاتف *' : 'Phone *'" class="input-field text-sm" required />
             </div>
-            <input v-model="newAddr.addressLine1" placeholder="Street Address *" class="input-field text-sm" required />
-            <input v-model="newAddr.addressLine2" placeholder="Apartment / Floor (optional)" class="input-field text-sm" />
+            <input v-model="newAddr.addressLine1" :placeholder="isAr ? 'العنوان بالتفصيل *' : 'Street Address *'" class="input-field text-sm" required />
+            <input v-model="newAddr.addressLine2" :placeholder="isAr ? 'الشقة / الدور (اختياري)' : 'Apartment / Floor (optional)'" class="input-field text-sm" />
             <div class="grid grid-cols-2 gap-3">
-              <input v-model="newAddr.city" placeholder="City *" class="input-field text-sm" required />
-              <input v-model="newAddr.governorate" placeholder="Governorate *" class="input-field text-sm" required />
+              <input v-model="newAddr.city" :placeholder="isAr ? 'المدينة *' : 'City *'" class="input-field text-sm" required />
+              <input v-model="newAddr.governorate" :placeholder="isAr ? 'المحافظة *' : 'Governorate *'" class="input-field text-sm" required />
             </div>
             <div class="flex items-center gap-2">
               <input v-model="newAddr.isDefault" type="checkbox" id="defaultAddr" class="accent-emerald-600" />
-              <label for="defaultAddr" class="text-sm text-gray-600 dark:text-gray-400">Set as default address</label>
+              <label for="defaultAddr" class="text-sm text-gray-600 dark:text-gray-400">{{ isAr ? 'تعيين كعنوان افتراضي' : 'Set as default address' }}</label>
             </div>
             <button @click="saveAddress" :disabled="savingAddr" class="btn-primary text-sm">
               <Icon v-if="savingAddr" name="svg-spinners:ring-resize" class="w-4 h-4" />
-              Save Address
+              {{ isAr ? 'حفظ العنوان' : 'Save Address' }}
             </button>
           </div>
         </div>
@@ -61,7 +61,7 @@
         <div class="card p-6">
           <h2 class="font-bold text-lg text-gray-900 dark:text-white mb-5 flex items-center gap-2">
             <span class="w-7 h-7 bg-emerald-600 text-white rounded-full text-sm flex items-center justify-center font-bold">2</span>
-            Payment Method
+            {{ t('checkout.payment_method') }}
           </h2>
 
           <div class="space-y-3">
@@ -82,20 +82,29 @@
         <div v-if="cartStore.cart.hasPrescriptionItems" class="card p-6">
           <h2 class="font-bold text-lg text-gray-900 dark:text-white mb-5 flex items-center gap-2">
             <span class="w-7 h-7 bg-orange-500 text-white rounded-full text-sm flex items-center justify-center font-bold">3</span>
-            Upload Prescription
+            {{ isAr ? 'رفع الوصفة الطبية' : 'Upload Prescription' }}
           </h2>
           <div class="bg-orange-50 dark:bg-orange-950 border border-orange-200 dark:border-orange-800 rounded-xl p-4 mb-4">
-            <p class="text-sm text-orange-700 dark:text-orange-400">Your cart contains prescription items. Please upload a valid prescription.</p>
+            <p class="text-sm text-orange-700 dark:text-orange-400">
+              {{ isAr ? 'سلتك تحتوي على أدوية تتطلب روشتة طبية. يرجى رفع الوصفة.' : 'Your cart contains prescription items. Please upload a valid prescription.' }}
+            </p>
           </div>
-          <input v-model="prescriptionUrl" type="url" placeholder="Paste prescription image URL or upload via WhatsApp"
+          <input v-model="prescriptionUrl" type="url"
+            :placeholder="isAr ? 'الصق رابط صورة الوصفة أو أرسلها عبر الواتساب' : 'Paste prescription image URL or upload via WhatsApp'"
             class="input-field text-sm" />
-          <p class="text-xs text-gray-400 mt-2">Or <a :href="waRxLink" target="_blank" class="text-emerald-600 hover:underline">send it via WhatsApp</a></p>
+          <p class="text-xs text-gray-400 mt-2">
+            {{ isAr ? 'أو ' : 'Or ' }}
+            <a :href="waRxLink" target="_blank" class="text-emerald-600 hover:underline">
+              {{ isAr ? 'أرسلها عبر الواتساب' : 'send it via WhatsApp' }}
+            </a>
+          </p>
         </div>
 
         <!-- Notes -->
         <div class="card p-6">
-          <h2 class="font-semibold text-gray-900 dark:text-white mb-3">Order Notes (Optional)</h2>
-          <textarea v-model="notes" rows="3" placeholder="Any special instructions for your order..."
+          <h2 class="font-semibold text-gray-900 dark:text-white mb-3">{{ t('checkout.notes') }}</h2>
+          <textarea v-model="notes" rows="3"
+            :placeholder="isAr ? 'أي تعليمات خاصة لطلبك...' : 'Any special instructions for your order...'"
             class="input-field text-sm resize-none"></textarea>
         </div>
       </div>
@@ -103,7 +112,7 @@
       <!-- Right: Order Summary -->
       <div class="lg:col-span-1">
         <div class="card p-5 sticky top-24">
-          <h3 class="font-bold text-gray-900 dark:text-white mb-4">Order Summary</h3>
+          <h3 class="font-bold text-gray-900 dark:text-white mb-4">{{ t('checkout.summary') }}</h3>
 
           <div class="space-y-3 mb-4">
             <div v-for="item in cartStore.cart.items" :key="item.id" class="flex gap-3">
@@ -111,7 +120,7 @@
                 class="w-12 h-12 rounded-lg object-contain bg-gray-50 flex-shrink-0" />
               <div class="flex-1 min-w-0">
                 <p class="text-xs font-medium line-clamp-2 text-gray-800 dark:text-gray-200">{{ item.productName }}</p>
-                <p class="text-xs text-gray-500">Qty: {{ item.quantity }}</p>
+                <p class="text-xs text-gray-500">{{ isAr ? 'الكمية:' : 'Qty:' }} {{ item.quantity }}</p>
               </div>
               <span class="text-xs font-semibold text-gray-900 dark:text-white flex-shrink-0">
                 {{ fmt.formatCurrency(item.lineTotal) }}
@@ -122,10 +131,10 @@
           <!-- Coupon -->
           <div class="border-t border-gray-100 dark:border-slate-700 pt-4 mb-4">
             <div class="flex gap-2">
-              <input v-model="couponCode" type="text" placeholder="Coupon code"
+              <input v-model="couponCode" type="text" :placeholder="isAr ? 'كود الخصم' : 'Coupon code'"
                 class="input-field text-sm py-2 flex-1" @keyup.enter="applyCoupon" />
               <button @click="applyCoupon" :disabled="couponLoading" class="btn-secondary text-xs px-3">
-                Apply
+                {{ t('cart.apply') }}
               </button>
             </div>
             <p v-if="couponMsg" :class="couponApplied ? 'text-emerald-600' : 'text-red-500'"
@@ -134,19 +143,19 @@
 
           <div class="space-y-2 text-sm">
             <div class="flex justify-between text-gray-600 dark:text-gray-400">
-              <span>Subtotal</span><span>{{ fmt.formatCurrency(cartStore.cart.subTotal) }}</span>
+              <span>{{ t('cart.subtotal') }}</span><span>{{ fmt.formatCurrency(cartStore.cart.subTotal) }}</span>
             </div>
             <div class="flex justify-between text-gray-600 dark:text-gray-400">
-              <span>Delivery</span>
+              <span>{{ t('cart.delivery') }}</span>
               <span :class="cartStore.cart.deliveryFee === 0 ? 'text-emerald-600 font-semibold' : ''">
-                {{ cartStore.cart.deliveryFee === 0 ? 'FREE' : fmt.formatCurrency(cartStore.cart.deliveryFee) }}
+                {{ cartStore.cart.deliveryFee === 0 ? (isAr ? 'مجاني' : 'FREE') : fmt.formatCurrency(cartStore.cart.deliveryFee) }}
               </span>
             </div>
             <div v-if="couponDiscount > 0" class="flex justify-between text-emerald-600 font-medium">
-              <span>Discount</span><span>-{{ fmt.formatCurrency(couponDiscount) }}</span>
+              <span>{{ t('cart.discount') }}</span><span>-{{ fmt.formatCurrency(couponDiscount) }}</span>
             </div>
             <div class="flex justify-between font-bold text-base pt-3 border-t border-gray-200 dark:border-slate-600">
-              <span>Total</span>
+              <span>{{ t('cart.total') }}</span>
               <span class="text-emerald-600">{{ fmt.formatCurrency(cartStore.cart.subTotal + cartStore.cart.deliveryFee - couponDiscount) }}</span>
             </div>
           </div>
@@ -155,11 +164,12 @@
             class="btn-primary w-full justify-center py-3.5 mt-5">
             <Icon v-if="placing" name="svg-spinners:ring-resize" class="w-5 h-5" />
             <Icon v-else name="heroicons:check-badge" class="w-5 h-5" />
-            {{ placing ? 'Placing Order…' : 'Place Order' }}
+            {{ placing ? (isAr ? 'جاري التأكيد...' : 'Placing Order…') : t('checkout.place_order') }}
           </button>
 
           <p class="text-xs text-gray-400 text-center mt-3 flex items-center justify-center gap-1">
-            <Icon name="heroicons:lock-closed" class="w-3.5 h-3.5" /> Secure & encrypted checkout
+            <Icon name="heroicons:lock-closed" class="w-3.5 h-3.5" />
+            {{ isAr ? 'دفع آمن ومشفر' : 'Secure & encrypted checkout' }}
           </p>
         </div>
       </div>
@@ -181,6 +191,7 @@ const { validateCoupon } = useCart()
 const fmt = useFormatters()
 const router = useRouter()
 const config = useRuntimeConfig()
+const { t, dir, isAr } = useI18n()
 
 const addresses = ref<Address[]>([])
 const selectedAddressId = ref<number | null>(null)
@@ -201,11 +212,11 @@ const newAddr = reactive({
   addressLine2: '', city: '', governorate: '', isDefault: false
 })
 
-const paymentMethods = [
-  { value: 0, label: 'Cash on Delivery', desc: 'Pay when your order arrives', icon: 'mdi:cash' },
-  { value: 1, label: 'Online Payment', desc: 'Credit/Debit card (coming soon)', icon: 'heroicons:credit-card' },
-  { value: 2, label: 'Order via WhatsApp', desc: 'Contact pharmacist directly', icon: 'mdi:whatsapp' },
-]
+const paymentMethods = computed(() => [
+  { value: 0, label: t('checkout.cod'), desc: isAr.value ? 'ادفع عند استلام الطلب' : 'Pay when your order arrives', icon: 'mdi:cash' },
+  { value: 1, label: t('checkout.online'), desc: isAr.value ? 'بطاقة ائتمانية/مدينية (قريباً)' : 'Credit/Debit card (coming soon)', icon: 'heroicons:credit-card' },
+  { value: 2, label: t('checkout.whatsapp'), desc: isAr.value ? 'تواصل مع الصيدلي مباشرة' : 'Contact pharmacist directly', icon: 'mdi:whatsapp' },
+])
 
 const canPlaceOrder = computed(() => selectedAddressId.value && !cartStore.isEmpty)
 const waRxLink = computed(() => fmt.whatsappLink(config.public.whatsappNumber, 'Hi! I want to send my prescription.'))
@@ -218,7 +229,7 @@ const saveAddress = async () => {
     addresses.value.push(res.data)
     selectedAddressId.value = res.data.id
     showAddressForm.value = false
-    showToast('Address saved!', 'success')
+    showToast(isAr.value ? 'تم حفظ العنوان!' : 'Address saved!', 'success')
   }
 }
 
@@ -230,11 +241,13 @@ const applyCoupon = async () => {
   if (result?.isValid) {
     couponApplied.value = true
     couponDiscount.value = result.discountAmount
-    couponMsg.value = `Coupon applied! Saving ${fmt.formatCurrency(result.discountAmount)}`
+    couponMsg.value = isAr.value
+      ? `تم تطبيق الكوبون! توفير ${fmt.formatCurrency(result.discountAmount)}`
+      : `Coupon applied! Saving ${fmt.formatCurrency(result.discountAmount)}`
   } else {
     couponApplied.value = false
     couponDiscount.value = 0
-    couponMsg.value = result?.message || 'Invalid coupon'
+    couponMsg.value = result?.message || (isAr.value ? 'كوبون غير صالح' : 'Invalid coupon')
   }
 }
 
@@ -251,10 +264,10 @@ const placeOrder = async () => {
   placing.value = false
 
   if (res.success && res.data) {
-    showToast('Order placed successfully! 🎉', 'success')
+    showToast(isAr.value ? 'تم تسجيل الطلب بنجاح! 🎉' : 'Order placed successfully! 🎉', 'success')
     router.push(`/account/orders/${res.data.id}?success=1`)
   } else {
-    showToast(res.message || 'Failed to place order', 'error')
+    showToast(res.message || (isAr.value ? 'فشل في تسجيل الطلب' : 'Failed to place order'), 'error')
   }
 }
 

@@ -372,10 +372,11 @@ export const useI18n = () => {
 
   // Helper to format currency based on locale
   const formatCurrency = (amount: number) => {
+    const a = amount === undefined || amount === null || isNaN(amount) ? 0 : amount
     if (locale.value === 'ar') {
-      return `${amount} ${t('common.currency')}`
+      return `${a} ${t('common.currency')}`
     }
-    return `${amount} EGP`
+    return `${a} EGP`
   }
 
   return {

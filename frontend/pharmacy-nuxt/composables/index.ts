@@ -72,17 +72,41 @@ export const useToast = () => {
 // ─── useFormatters ────────────────────────────────────────────────────────────
 export const useFormatters = () => {
   function formatCurrency(amount: number, currency = 'EGP') {
-    return new Intl.NumberFormat('ar-EG', { style: 'currency', currency }).format(amount)
+    if (amount === undefined || amount === null || isNaN(amount)) return `0.00 ${currency}`
+    try {
+      return new Intl.NumberFormat('ar-EG', { style: 'currency', currency }).format(amount)
+    } catch {
+      return `${amount.toFixed(2)} ${currency}`
+    }
   }
   function formatDate(date: string) {
-    return new Date(date).toLocaleDateString('en-EG', { year: 'numeric', month: 'short', day: 'numeric' })
+    if (!date) return ''
+    try {
+      const d = new Date(date)
+      if (isNaN(d.getTime())) return date
+      return d.toLocaleDateString('en-EG', { year: 'numeric', month: 'short', day: 'numeric' })
+    } catch {
+      return date
+    }
   }
   function formatDateTime(date: string) {
-    return new Date(date).toLocaleString('en-EG', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+    if (!date) return ''
+    try {
+      const d = new Date(date)
+      if (isNaN(d.getTime())) return date
+      return d.toLocaleString('en-EG', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+    } catch {
+      return date
+    }
   }
-  function truncate(str: string, n = 80) { return str.length > n ? str.slice(0, n) + '…' : str }
+  function truncate(str: string, n = 80) {
+    if (!str) return ''
+    return str.length > n ? str.slice(0, n) + '…' : str
+  }
   function whatsappLink(phone: string, message: string) {
-    return `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`
+    const p = phone || ''
+    const m = message || ''
+    return `https://wa.me/${p.replace(/\D/g, '')}?text=${encodeURIComponent(m)}`
   }
   return { formatCurrency, formatDate, formatDateTime, truncate, whatsappLink }
 }

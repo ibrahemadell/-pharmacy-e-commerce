@@ -448,77 +448,77 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-BeiHy4vs.mjs')
+    component: () => import('./index-C1WtH3Gi.mjs')
   },
   {
     name: "checkout",
     path: "/checkout",
     meta: { "middleware": "auth" },
-    component: () => import('./checkout-BzJ9UNce.mjs')
+    component: () => import('./checkout-DQeUy_JA.mjs')
   },
   {
     name: "auth-login",
     path: "/auth/login",
     meta: __nuxt_page_meta$d || {},
-    component: () => import('./login-6lzWFBPx.mjs')
+    component: () => import('./login-4w51faCd.mjs')
   },
   {
     name: "admin",
     path: "/admin",
     meta: { ...__nuxt_page_meta$c || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-BPfRyauO.mjs')
+    component: () => import('./index-DcEKE6_C.mjs')
   },
   {
     name: "auth-register",
     path: "/auth/register",
     meta: __nuxt_page_meta$b || {},
-    component: () => import('./register-CHbHr0Xe.mjs')
+    component: () => import('./register-CD2Dl5Ux.mjs')
   },
   {
     name: "admin-settings",
     path: "/admin/settings",
     meta: { ...__nuxt_page_meta$a || {}, ...{ "middleware": "admin" } },
-    component: () => import('./settings-DA0mxfsn.mjs')
+    component: () => import('./settings-PjeMFa18.mjs')
   },
   {
     name: "products",
     path: "/products",
-    component: () => import('./index-Bjw0z7pJ.mjs')
+    component: () => import('./index-zoYWxF01.mjs')
   },
   {
     name: "account-profile",
     path: "/account/profile",
     meta: { "middleware": "auth" },
-    component: () => import('./profile-bcCAgpsl.mjs')
+    component: () => import('./profile-C-gbeP9D.mjs')
   },
   {
     name: "admin-analytics",
     path: "/admin/analytics",
     meta: { ...__nuxt_page_meta$9 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./analytics-DDJ1hR9M.mjs')
+    component: () => import('./analytics-B-sh9moR.mjs')
   },
   {
     name: "admin-inventory",
     path: "/admin/inventory",
     meta: { ...__nuxt_page_meta$8 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./inventory-C_HlnOOi.mjs')
+    component: () => import('./inventory-Cdoaq6TA.mjs')
   },
   {
     name: "products-slug",
     path: "/products/:slug()",
-    component: () => import('./_slug_-DvZFx_6B.mjs')
+    component: () => import('./_slug_-CFUATK65.mjs')
   },
   {
     name: "admin-orders-id",
     path: "/admin/orders/:id()",
     meta: { ...__nuxt_page_meta$7 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./_id_-CirgwJpS.mjs')
+    component: () => import('./_id_-CdC1XCDB.mjs')
   },
   {
     name: "admin-orders",
     path: "/admin/orders",
     meta: { ...__nuxt_page_meta$6 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-JDo6a2ly.mjs')
+    component: () => import('./index-C0O-UC8S.mjs')
   },
   {
     name: "admin-products-new",
@@ -530,49 +530,49 @@ const _routes = [
     name: "account-orders-id",
     path: "/account/orders/:id()",
     meta: { "middleware": "auth" },
-    component: () => import('./_id_-ZDLNmLOY.mjs')
+    component: () => import('./_id_-B3I0yFk-.mjs')
   },
   {
     name: "admin-coupons",
     path: "/admin/coupons",
     meta: { ...__nuxt_page_meta$4 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-0mgv7BU4.mjs')
+    component: () => import('./index-jO7XYtQb.mjs')
   },
   {
     name: "account-orders",
     path: "/account/orders",
     meta: { "middleware": "auth" },
-    component: () => import('./index-C8Kmtf6o.mjs')
+    component: () => import('./index-BNnFNODY.mjs')
   },
   {
     name: "admin-products",
     path: "/admin/products",
     meta: { ...__nuxt_page_meta$3 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-C3aJr0mn.mjs')
+    component: () => import('./index-CcSb-nF7.mjs')
   },
   {
     name: "admin-customers",
     path: "/admin/customers",
     meta: { ...__nuxt_page_meta$2 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-j4yVxTIH.mjs')
+    component: () => import('./index-ZlVx6pOO.mjs')
   },
   {
     name: "admin-categories",
     path: "/admin/categories",
     meta: { ...__nuxt_page_meta$1 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-CfSSg1Ml.mjs')
+    component: () => import('./index-CjvzmvnO.mjs')
   },
   {
     name: "account-addresses",
     path: "/account/addresses",
     meta: { "middleware": "auth" },
-    component: () => import('./index-CT8g2Ue2.mjs')
+    component: () => import('./index-D5P61C0W.mjs')
   },
   {
     name: "admin-products-id-edit",
     path: "/admin/products/:id()/edit",
     meta: { ...__nuxt_page_meta || {}, ...{ "middleware": "admin" } },
-    component: () => import('./edit-Dz22Evtr.mjs')
+    component: () => import('./edit-CEnemJD3.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -1737,8 +1737,8 @@ const plugins = [
   plugin_server_9Ca9_HhnjAGwBWpwAydRauMHxWoxTDY60BrArRnXN_A
 ];
 const layouts = {
-  admin: defineAsyncComponent(() => import('./admin-C9TBBIY_.mjs').then((m) => m.default || m)),
-  default: defineAsyncComponent(() => import('./default-B-C9zY-w.mjs').then((m) => m.default || m))
+  admin: defineAsyncComponent(() => import('./admin-t79ROP6z.mjs').then((m) => m.default || m)),
+  default: defineAsyncComponent(() => import('./default-CRt4uW3I.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;
 const LayoutLoader = defineComponent({

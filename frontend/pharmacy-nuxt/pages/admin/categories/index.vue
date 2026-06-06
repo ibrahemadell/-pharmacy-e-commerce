@@ -20,7 +20,7 @@
         class="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 p-4 hover:shadow-md transition-shadow group">
         <div class="flex items-start justify-between mb-3">
           <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900 rounded-xl flex items-center justify-center">
-            <NuxtImg v-if="cat.imageUrl" :src="cat.imageUrl" :alt="cat.name" class="w-8 h-8 object-contain" />
+            <img v-if="cat.imageUrl" :src="cat.imageUrl" :alt="cat.name" class="w-8 h-8 object-contain" />
             <Icon v-else name="heroicons:tag" class="w-6 h-6 text-emerald-600" />
           </div>
           <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

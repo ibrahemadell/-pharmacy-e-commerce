@@ -116,7 +116,7 @@
 
           <div class="space-y-3 mb-4">
             <div v-for="item in cartStore.cart.items" :key="item.id" class="flex gap-3">
-              <NuxtImg :src="item.productImage || '/img/placeholder.png'" :alt="item.productName"
+              <img :src="item.productImage || '/img/placeholder.png'" :alt="item.productName"
                 class="w-12 h-12 rounded-lg object-contain bg-gray-50 flex-shrink-0" />
               <div class="flex-1 min-w-0">
                 <p class="text-xs font-medium line-clamp-2 text-gray-800 dark:text-gray-200">{{ item.productName }}</p>

@@ -1,1 +1,0 @@
-import{o,R as a,x as r}from"./B3aPGi4T.js";const n=o(e=>{const t=a();if(t.initFromStorage(),!t.isAuthenticated)return r(`/auth/login?redirect=${encodeURIComponent(e.fullPath)}`)});export{n as default};

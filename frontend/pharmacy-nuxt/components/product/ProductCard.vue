@@ -19,7 +19,7 @@
 
     <!-- Image -->
     <NuxtLink :to="`/products/${product.slug}`" class="block overflow-hidden bg-gray-50 dark:bg-slate-800">
-      <NuxtImg
+      <img
         :src="product.primaryImage || '/img/placeholder.png'"
         :alt="isAr ? (product.nameAr || product.name) : product.name"
         class="w-full h-44 object-contain p-4 group-hover:scale-105 transition-transform duration-300"

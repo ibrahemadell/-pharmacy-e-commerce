@@ -1,18 +1,14 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { defineComponent, ref, inject, h, Suspense, hasInjectionContext, toRef, isRef, shallowRef, resolveComponent, Fragment, getCurrentInstance, computed, unref, provide, shallowReactive, reactive, effectScope, isReactive, toRaw, getCurrentScope, onScopeDispose, watch, nextTick, toRefs, markRaw, createElementBlock, cloneVNode, defineAsyncComponent, useSSRContext, createApp, withCtx, createVNode, withAsyncContext, mergeProps, resolveDynamicComponent, createTextVNode, onErrorCaptured, onServerPrefetch, isReadonly, isShallow } from 'vue';
-import { r as hasProtocol, s as isScriptProtocol, t as joinURL, u as klona, v as parseQuery, D as withQuery, y as sanitizeStatusCode, w as parseURL, j as encodePath, e as decodePath, h as defuFn, l as getContext, E as withTrailingSlash, F as withoutTrailingSlash, $ as $fetch, b as baseURL, g as defu, d as createHooks, c as createError$1, k as executeAsync } from '../_/nitro.mjs';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { defineComponent, ref, inject, h, Suspense, hasInjectionContext, toRef, isRef, shallowRef, resolveComponent, Fragment, computed, unref, getCurrentInstance, provide, shallowReactive, reactive, effectScope, isReactive, toRaw, getCurrentScope, onScopeDispose, watch, nextTick, toRefs, markRaw, createElementBlock, cloneVNode, defineAsyncComponent, useSSRContext, createApp, withCtx, createVNode, withAsyncContext, mergeProps, resolveDynamicComponent, createTextVNode, onErrorCaptured, onServerPrefetch, isReadonly, isShallow } from 'vue';
+import { o as hasProtocol, p as isScriptProtocol, r as joinURL, s as klona, t as parseQuery, z as withQuery, v as sanitizeStatusCode, u as parseURL, g as encodePath, d as decodePath, f as defuFn, i as getContext, A as withTrailingSlash, B as withoutTrailingSlash, $ as $fetch, e as defu, a as createHooks, c as createError$1, h as executeAsync } from '../_/nitro.mjs';
+import { u as useHead$1, h as headSymbol, b as baseURL } from '../routes/renderer.mjs';
 import { RouterView, useRoute as useRoute$1, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
 import { ssrRenderComponent, ssrRenderAttrs, ssrRenderVNode, ssrRenderSlot, ssrInterpolate, ssrRenderSuspense } from 'vue/server-renderer';
 import { Icon as Icon$1 } from '@iconify/vue/dist/offline';
 import { addAPIProvider, loadIcon } from '@iconify/vue';
-import { u as useHead$1, h as headSymbol } from '../routes/renderer.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:events';
 import 'node:buffer';
-import 'node:url';
-import 'image-meta';
-import '@fastify/accept-negotiator';
-import 'etag';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
@@ -452,131 +448,131 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-DIWPSXoc.mjs')
+    component: () => import('./index-BeiHy4vs.mjs')
   },
   {
     name: "checkout",
     path: "/checkout",
     meta: { "middleware": "auth" },
-    component: () => import('./checkout-DUyoXwvr.mjs')
+    component: () => import('./checkout-BzJ9UNce.mjs')
   },
   {
     name: "auth-login",
     path: "/auth/login",
     meta: __nuxt_page_meta$d || {},
-    component: () => import('./login-IUt5I6_I.mjs')
+    component: () => import('./login-6lzWFBPx.mjs')
   },
   {
     name: "admin",
     path: "/admin",
     meta: { ...__nuxt_page_meta$c || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-OwNdAl1B.mjs')
+    component: () => import('./index-BPfRyauO.mjs')
   },
   {
     name: "auth-register",
     path: "/auth/register",
     meta: __nuxt_page_meta$b || {},
-    component: () => import('./register-DW-yAo8y.mjs')
+    component: () => import('./register-CHbHr0Xe.mjs')
   },
   {
     name: "admin-settings",
     path: "/admin/settings",
     meta: { ...__nuxt_page_meta$a || {}, ...{ "middleware": "admin" } },
-    component: () => import('./settings-C7HBz5LI.mjs')
+    component: () => import('./settings-DA0mxfsn.mjs')
   },
   {
     name: "products",
     path: "/products",
-    component: () => import('./index-BWK9ICP4.mjs')
+    component: () => import('./index-Bjw0z7pJ.mjs')
   },
   {
     name: "account-profile",
     path: "/account/profile",
     meta: { "middleware": "auth" },
-    component: () => import('./profile-B4ErEi8H.mjs')
+    component: () => import('./profile-bcCAgpsl.mjs')
   },
   {
     name: "admin-analytics",
     path: "/admin/analytics",
     meta: { ...__nuxt_page_meta$9 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./analytics-DxBlxKIw.mjs')
+    component: () => import('./analytics-DDJ1hR9M.mjs')
   },
   {
     name: "admin-inventory",
     path: "/admin/inventory",
     meta: { ...__nuxt_page_meta$8 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./inventory-DzbIXsmx.mjs')
+    component: () => import('./inventory-C_HlnOOi.mjs')
   },
   {
     name: "products-slug",
     path: "/products/:slug()",
-    component: () => import('./_slug_-CPAi5ZRO.mjs')
+    component: () => import('./_slug_-DvZFx_6B.mjs')
   },
   {
     name: "admin-orders-id",
     path: "/admin/orders/:id()",
     meta: { ...__nuxt_page_meta$7 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./_id_-CXAFQee-.mjs')
+    component: () => import('./_id_-CirgwJpS.mjs')
   },
   {
     name: "admin-orders",
     path: "/admin/orders",
     meta: { ...__nuxt_page_meta$6 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-D5Cacg9E.mjs')
+    component: () => import('./index-JDo6a2ly.mjs')
   },
   {
     name: "admin-products-new",
     path: "/admin/products/new",
     meta: { ...__nuxt_page_meta$5 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./new-xH_T-vbj.mjs')
+    component: () => import('./new-C628An58.mjs')
   },
   {
     name: "account-orders-id",
     path: "/account/orders/:id()",
     meta: { "middleware": "auth" },
-    component: () => import('./_id_-Cj-LnpnF.mjs')
+    component: () => import('./_id_-ZDLNmLOY.mjs')
   },
   {
     name: "admin-coupons",
     path: "/admin/coupons",
     meta: { ...__nuxt_page_meta$4 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-CnQ97P66.mjs')
+    component: () => import('./index-0mgv7BU4.mjs')
   },
   {
     name: "account-orders",
     path: "/account/orders",
     meta: { "middleware": "auth" },
-    component: () => import('./index-D_fMnDKm.mjs')
+    component: () => import('./index-C8Kmtf6o.mjs')
   },
   {
     name: "admin-products",
     path: "/admin/products",
     meta: { ...__nuxt_page_meta$3 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-CFbZCBI8.mjs')
+    component: () => import('./index-C3aJr0mn.mjs')
   },
   {
     name: "admin-customers",
     path: "/admin/customers",
     meta: { ...__nuxt_page_meta$2 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-8y-KNmSU.mjs')
+    component: () => import('./index-j4yVxTIH.mjs')
   },
   {
     name: "admin-categories",
     path: "/admin/categories",
     meta: { ...__nuxt_page_meta$1 || {}, ...{ "middleware": "admin" } },
-    component: () => import('./index-Di93ORXE.mjs')
+    component: () => import('./index-CfSSg1Ml.mjs')
   },
   {
     name: "account-addresses",
     path: "/account/addresses",
     meta: { "middleware": "auth" },
-    component: () => import('./index-DjRZY8Es.mjs')
+    component: () => import('./index-CT8g2Ue2.mjs')
   },
   {
     name: "admin-products-id-edit",
     path: "/admin/products/:id()/edit",
     meta: { ...__nuxt_page_meta || {}, ...{ "middleware": "admin" } },
-    component: () => import('./edit-CvN9-Kfi.mjs')
+    component: () => import('./edit-Dz22Evtr.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -1741,8 +1737,8 @@ const plugins = [
   plugin_server_9Ca9_HhnjAGwBWpwAydRauMHxWoxTDY60BrArRnXN_A
 ];
 const layouts = {
-  admin: defineAsyncComponent(() => import('./admin-DIBSouOW.mjs').then((m) => m.default || m)),
-  default: defineAsyncComponent(() => import('./default-BA9X3nl5.mjs').then((m) => m.default || m))
+  admin: defineAsyncComponent(() => import('./admin-C9TBBIY_.mjs').then((m) => m.default || m)),
+  default: defineAsyncComponent(() => import('./default-B-C9zY-w.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;
 const LayoutLoader = defineComponent({
@@ -2300,5 +2296,5 @@ let entry;
 }
 const entry_default = ((ssrContext) => entry(ssrContext));
 
-export { __nuxt_component_0 as _, __nuxt_component_1 as a, __nuxt_component_2 as b, _export_sfc as c, defineNuxtRouteMiddleware as d, entry_default as default, defineStore as e, useHead as f, useNuxtApp as g, useRoute as h, useRouter as i, useRuntimeConfig as j, useState as k, navigateTo as n, resolveIconName as r, useAppConfig as u };
+export { __nuxt_component_0 as _, __nuxt_component_1 as a, __nuxt_component_2 as b, _export_sfc as c, defineNuxtRouteMiddleware as d, entry_default as default, defineStore as e, useHead as f, useRoute as g, useRouter as h, useRuntimeConfig as i, useState as j, navigateTo as n, resolveIconName as r, useAppConfig as u };
 //# sourceMappingURL=server.mjs.map

@@ -1,5 +1,5 @@
 import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'vue-bundle-renderer/runtime';
-import { a as buildAssetsURL, x as publicAssetsURL, B as useRuntimeConfig, o as getResponseStatusText, n as getResponseStatus, j as encodePath, f as defineRenderHandler, m as getQuery, c as createError, p as getRouteRules, t as joinURL, A as useNitroApp } from '../_/nitro.mjs';
+import { q as joinRelativeURL, y as useRuntimeConfig, l as getResponseStatusText, k as getResponseStatus, g as encodePath, b as defineRenderHandler, j as getQuery, c as createError, m as getRouteRules, r as joinURL, x as useNitroApp } from '../_/nitro.mjs';
 import { renderToString } from 'vue/server-renderer';
 import { createHead as createHead$1, propsToString, renderSSRHead } from 'unhead/server';
 import { stringify, uneval } from 'devalue';
@@ -87,6 +87,24 @@ const appTeleportTag = "div";
 const appTeleportAttrs = {"id":"teleports"};
 
 const appId = "nuxt-app";
+
+function baseURL() {
+	
+	return useRuntimeConfig().app.baseURL;
+}
+function buildAssetsDir() {
+	
+	return useRuntimeConfig().app.buildAssetsDir;
+}
+function buildAssetsURL(...path) {
+	return joinRelativeURL(publicAssetsURL(), buildAssetsDir(), ...path);
+}
+function publicAssetsURL(...path) {
+	
+	const app = useRuntimeConfig().app;
+	const publicBase = app.cdnURL || app.baseURL;
+	return path.length ? joinRelativeURL(publicBase, ...path) : publicBase;
+}
 
 // @ts-expect-error private property consumed by vite-generated url helpers
 globalThis.__buildAssetsURL = buildAssetsURL;
@@ -490,5 +508,5 @@ const renderer = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   default: handler
 }, Symbol.toStringTag, { value: 'Module' }));
 
-export { headSymbol as h, renderer as r, useHead as u };
+export { buildAssetsURL as a, baseURL as b, headSymbol as h, renderer as r, useHead as u };
 //# sourceMappingURL=renderer.mjs.map

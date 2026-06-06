@@ -1,0 +1,1 @@
+import{o as i,H as a,r as e}from"./CIFnfhlH.js";const o=i(()=>{const t=a();if(t.initFromStorage(),!t.isAuthenticated)return e("/auth/login");if(!t.isAdmin&&!t.isPharmacist)return e("/")});export{o as default};

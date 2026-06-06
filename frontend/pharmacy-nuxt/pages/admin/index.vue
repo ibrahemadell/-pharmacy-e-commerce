@@ -126,7 +126,7 @@
         <div class="divide-y divide-gray-50 dark:divide-slate-700/50">
           <div v-for="p in stats.lowStockAlerts" :key="p.id"
             class="flex items-center gap-3 px-5 py-3.5 hover:bg-gray-50 dark:hover:bg-slate-700/30 transition-colors">
-            <NuxtImg :src="p.primaryImage || '/img/placeholder.png'" :alt="p.name"
+            <img :src="p.primaryImage || '/img/placeholder.png'" :alt="p.name"
               class="w-10 h-10 rounded-lg object-contain bg-gray-50 flex-shrink-0" />
             <div class="flex-1 min-w-0">
               <p class="text-sm font-semibold text-gray-900 dark:text-white truncate">{{ p.name }}</p>

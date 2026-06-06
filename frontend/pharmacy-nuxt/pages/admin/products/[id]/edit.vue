@@ -214,7 +214,7 @@
               </div>
               <div v-if="form.imageUrls.length" class="grid grid-cols-3 gap-2 mt-3">
                 <div v-for="(url, i) in form.imageUrls" :key="i" class="relative group aspect-square">
-                  <NuxtImg :src="url" class="w-full h-full object-contain rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50" />
+                  <img :src="url" class="w-full h-full object-contain rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50" />
                   <button type="button" @click="form.imageUrls.splice(i, 1)"
                     class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <Icon name="heroicons:x-mark" class="w-3 h-3" />

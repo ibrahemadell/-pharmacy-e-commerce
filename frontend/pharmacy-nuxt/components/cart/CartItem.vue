@@ -2,7 +2,7 @@
   <div class="flex gap-3 p-3 bg-white dark:bg-slate-800 rounded-xl border border-gray-100 dark:border-slate-700">
     <!-- Image -->
     <NuxtLink :to="`/products/${item.productSlug}`" class="flex-shrink-0">
-      <NuxtImg :src="item.productImage || '/img/placeholder.png'" :alt="item.productName"
+      <img :src="item.productImage || '/img/placeholder.png'" :alt="item.productName"
         class="w-16 h-16 rounded-lg object-cover bg-gray-50" />
     </NuxtLink>
 

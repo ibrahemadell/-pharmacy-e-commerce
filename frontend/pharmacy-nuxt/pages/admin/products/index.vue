@@ -69,7 +69,7 @@
                 </td>
                 <td class="px-4 py-3.5">
                   <div class="flex items-center gap-3">
-                    <NuxtImg :src="p.primaryImage || '/img/placeholder.png'" :alt="p.name"
+                    <img :src="p.primaryImage || '/img/placeholder.png'" :alt="p.name"
                       class="w-10 h-10 rounded-lg object-contain bg-gray-50 flex-shrink-0" />
                     <div class="min-w-0">
                       <p class="text-sm font-semibold text-gray-900 dark:text-white truncate max-w-[200px]">{{ p.name }}</p>

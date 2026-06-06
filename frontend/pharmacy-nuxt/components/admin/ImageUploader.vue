@@ -38,7 +38,7 @@
     <div v-if="modelValue.length" class="grid grid-cols-4 gap-2 mt-4">
       <div v-for="(url, i) in modelValue" :key="url + i"
         class="relative group aspect-square">
-        <NuxtImg :src="url" class="w-full h-full object-contain rounded-xl border border-gray-200 dark:border-slate-600 bg-gray-50 dark:bg-slate-700" />
+        <img :src="url" class="w-full h-full object-contain rounded-xl border border-gray-200 dark:border-slate-600 bg-gray-50 dark:bg-slate-700" />
 
         <!-- Remove button -->
         <button type="button" @click="removeImage(i)"

@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@vueuse/nuxt',
     'nuxt-icon',
-    '@nuxt/image',
   ],
 
   colorMode: {
@@ -59,16 +58,8 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  image: {
-    provider: 'ipx',
-    ipx: {},
-  },
-
   nitro: {
     preset: 'vercel',
-    externals: {
-      inline: ['ipx'],
-    },
   },
 
   compatibilityDate: '2024-01-01',

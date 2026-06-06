@@ -17,7 +17,7 @@
       <!-- Gallery -->
       <div>
         <div class="aspect-square bg-gray-50 dark:bg-slate-800 rounded-2xl overflow-hidden mb-3 border border-gray-100 dark:border-slate-700">
-          <NuxtImg
+          <img
             :src="activeImage || '/img/placeholder.png'"
             :alt="product.name"
             class="w-full h-full object-contain p-8"
@@ -28,7 +28,7 @@
             @click="activeImage = img.imageUrl"
             :class="activeImage === img.imageUrl ? 'border-emerald-500 ring-1 ring-emerald-500' : 'border-gray-200 dark:border-slate-600'"
             class="flex-shrink-0 w-16 h-16 border rounded-xl overflow-hidden bg-gray-50 dark:bg-slate-800 transition-all">
-            <NuxtImg :src="img.imageUrl" :alt="product.name" class="w-full h-full object-contain p-1" />
+            <img :src="img.imageUrl" :alt="product.name" class="w-full h-full object-contain p-1" />
           </button>
         </div>
       </div>

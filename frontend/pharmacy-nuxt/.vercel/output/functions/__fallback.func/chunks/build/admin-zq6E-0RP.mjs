@@ -6,23 +6,19 @@ import 'node:http';
 import 'node:https';
 import 'node:events';
 import 'node:buffer';
-import 'node:url';
-import 'image-meta';
-import '@fastify/accept-negotiator';
-import 'etag';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
-import 'vue-router';
-import 'vue/server-renderer';
-import '@iconify/vue/dist/offline';
-import '@iconify/vue';
 import '../routes/renderer.mjs';
 import 'vue-bundle-renderer/runtime';
+import 'vue/server-renderer';
 import 'unhead/server';
 import 'devalue';
 import 'unhead/utils';
 import 'unhead/plugins';
+import 'vue-router';
+import '@iconify/vue/dist/offline';
+import '@iconify/vue';
 
 const admin = defineNuxtRouteMiddleware(() => {
   const authStore = useAuthStore();

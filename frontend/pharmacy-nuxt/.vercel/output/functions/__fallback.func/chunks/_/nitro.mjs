@@ -1,13 +1,9 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import http from 'node:http';
+import http from 'node:http';
 import https from 'node:https';
 import { EventEmitter } from 'node:events';
 import { Buffer as Buffer$1 } from 'node:buffer';
-import { fileURLToPath } from 'node:url';
-import { imageMeta } from 'image-meta';
-import { negotiate } from '@fastify/accept-negotiator';
-import getEtag from 'etag';
 import { promises, existsSync } from 'node:fs';
-import { resolve as resolve$1, dirname as dirname$1, join as join$1 } from 'node:path';
+import { resolve, dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
 
 const suspectProtoRx = /"(?:_|\\u0{2}5[Ff]){2}(?:p|\\u0{2}70)(?:r|\\u0{2}72)(?:o|\\u0{2}6[Ff])(?:t|\\u0{2}74)(?:o|\\u0{2}6[Ff])(?:_|\\u0{2}5[Ff]){2}"\s*:/;
@@ -101,9 +97,6 @@ function encodeQueryKey(text) {
 }
 function encodePath(text) {
   return encode(text).replace(HASH_RE, "%23").replace(IM_RE, "%3F").replace(ENC_ENC_SLASH_RE, "%2F").replace(AMPERSAND_RE, "%26").replace(PLUS_RE, "%2B");
-}
-function encodeParam(text) {
-  return encodePath(text).replace(SLASH_RE, "%2F");
 }
 function decode(text = "") {
   try {
@@ -678,25 +671,7 @@ const defuFn = createDefu((object, key, currentValue) => {
   }
 });
 
-function o(n){throw new Error(`${n} is not implemented yet!`)}let i$1 = class i extends EventEmitter{__unenv__={};readableEncoding=null;readableEnded=true;readableFlowing=false;readableHighWaterMark=0;readableLength=0;readableObjectMode=false;readableAborted=false;readableDidRead=false;closed=false;errored=null;readable=false;destroyed=false;static from(e,t){return new i(t)}constructor(e){super();}_read(e){}read(e){}setEncoding(e){return this}pause(){return this}resume(){return this}isPaused(){return  true}unpipe(e){return this}unshift(e,t){}wrap(e){return this}push(e,t){return  false}_destroy(e,t){this.removeAllListeners();}destroy(e){return this.destroyed=true,this._destroy(e),this}pipe(e,t){return {}}compose(e,t){throw new Error("Method not implemented.")}[Symbol.asyncDispose](){return this.destroy(),Promise.resolve()}async*[Symbol.asyncIterator](){throw o("Readable.asyncIterator")}iterator(e){throw o("Readable.iterator")}map(e,t){throw o("Readable.map")}filter(e,t){throw o("Readable.filter")}forEach(e,t){throw o("Readable.forEach")}reduce(e,t,r){throw o("Readable.reduce")}find(e,t){throw o("Readable.find")}findIndex(e,t){throw o("Readable.findIndex")}some(e,t){throw o("Readable.some")}toArray(e){throw o("Readable.toArray")}every(e,t){throw o("Readable.every")}flatMap(e,t){throw o("Readable.flatMap")}drop(e,t){throw o("Readable.drop")}take(e,t){throw o("Readable.take")}asIndexedPairs(e){throw o("Readable.asIndexedPairs")}};let l$1 = class l extends EventEmitter{__unenv__={};writable=true;writableEnded=false;writableFinished=false;writableHighWaterMark=0;writableLength=0;writableObjectMode=false;writableCorked=0;closed=false;errored=null;writableNeedDrain=false;writableAborted=false;destroyed=false;_data;_encoding="utf8";constructor(e){super();}pipe(e,t){return {}}_write(e,t,r){if(this.writableEnded){r&&r();return}if(this._data===void 0)this._data=e;else {const s=typeof this._data=="string"?Buffer$1.from(this._data,this._encoding||t||"utf8"):this._data,a=typeof e=="string"?Buffer$1.from(e,t||this._encoding||"utf8"):e;this._data=Buffer$1.concat([s,a]);}this._encoding=t,r&&r();}_writev(e,t){}_destroy(e,t){}_final(e){}write(e,t,r){const s=typeof t=="string"?this._encoding:"utf8",a=typeof t=="function"?t:typeof r=="function"?r:void 0;return this._write(e,s,a),true}setDefaultEncoding(e){return this}end(e,t,r){const s=typeof e=="function"?e:typeof t=="function"?t:typeof r=="function"?r:void 0;if(this.writableEnded)return s&&s(),this;const a=e===s?void 0:e;if(a){const u=t===s?void 0:t;this.write(a,u,s);}return this.writableEnded=true,this.writableFinished=true,this.emit("close"),this.emit("finish"),this}cork(){}uncork(){}destroy(e){return this.destroyed=true,delete this._data,this.removeAllListeners(),this}compose(e,t){throw new Error("Method not implemented.")}[Symbol.asyncDispose](){return Promise.resolve()}};const c=class{allowHalfOpen=true;_destroy;constructor(e=new i$1,t=new l$1){Object.assign(this,e),Object.assign(this,t),this._destroy=m(e._destroy,t._destroy);}};function _(){return Object.assign(c.prototype,i$1.prototype),Object.assign(c.prototype,l$1.prototype),c}function m(...n){return function(...e){for(const t of n)t(...e);}}const g=_();class A extends g{__unenv__={};bufferSize=0;bytesRead=0;bytesWritten=0;connecting=false;destroyed=false;pending=false;localAddress="";localPort=0;remoteAddress="";remoteFamily="";remotePort=0;autoSelectFamilyAttemptedAddresses=[];readyState="readOnly";constructor(e){super();}write(e,t,r){return  false}connect(e,t,r){return this}end(e,t,r){return this}setEncoding(e){return this}pause(){return this}resume(){return this}setTimeout(e,t){return this}setNoDelay(e){return this}setKeepAlive(e,t){return this}address(){return {}}unref(){return this}ref(){return this}destroySoon(){this.destroy();}resetAndDestroy(){const e=new Error("ERR_SOCKET_CLOSED");return e.code="ERR_SOCKET_CLOSED",this.destroy(e),this}}class y extends i$1{aborted=false;httpVersion="1.1";httpVersionMajor=1;httpVersionMinor=1;complete=true;connection;socket;headers={};trailers={};method="GET";url="/";statusCode=200;statusMessage="";closed=false;errored=null;readable=false;constructor(e){super(),this.socket=this.connection=e||new A;}get rawHeaders(){const e=this.headers,t=[];for(const r in e)if(Array.isArray(e[r]))for(const s of e[r])t.push(r,s);else t.push(r,e[r]);return t}get rawTrailers(){return []}setTimeout(e,t){return this}get headersDistinct(){return p(this.headers)}get trailersDistinct(){return p(this.trailers)}}function p(n){const e={};for(const[t,r]of Object.entries(n))t&&(e[t]=(Array.isArray(r)?r:[r]).filter(Boolean));return e}let w$1 = class w extends l$1{statusCode=200;statusMessage="";upgrading=false;chunkedEncoding=false;shouldKeepAlive=false;useChunkedEncodingByDefault=false;sendDate=false;finished=false;headersSent=false;strictContentLength=false;connection=null;socket=null;req;_headers={};constructor(e){super(),this.req=e;}assignSocket(e){e._httpMessage=this,this.socket=e,this.connection=e,this.emit("socket",e),this._flush();}_flush(){this.flushHeaders();}detachSocket(e){}writeContinue(e){}writeHead(e,t,r){e&&(this.statusCode=e),typeof t=="string"&&(this.statusMessage=t,t=void 0);const s=r||t;if(s&&!Array.isArray(s))for(const a in s)this.setHeader(a,s[a]);return this.headersSent=true,this}writeProcessing(){}setTimeout(e,t){return this}appendHeader(e,t){e=e.toLowerCase();const r=this._headers[e],s=[...Array.isArray(r)?r:[r],...Array.isArray(t)?t:[t]].filter(Boolean);return this._headers[e]=s.length>1?s:s[0],this}setHeader(e,t){return this._headers[e.toLowerCase()]=t,this}setHeaders(e){for(const[t,r]of Object.entries(e))this.setHeader(t,r);return this}getHeader(e){return this._headers[e.toLowerCase()]}getHeaders(){return this._headers}getHeaderNames(){return Object.keys(this._headers)}hasHeader(e){return e.toLowerCase()in this._headers}removeHeader(e){delete this._headers[e.toLowerCase()];}addTrailers(e){}flushHeaders(){}writeEarlyHints(e,t){typeof t=="function"&&t();}};const E=(()=>{const n=function(){};return n.prototype=Object.create(null),n})();function R(n={}){const e=new E,t=Array.isArray(n)||H(n)?n:Object.entries(n);for(const[r,s]of t)if(s){if(e[r]===void 0){e[r]=s;continue}e[r]=[...Array.isArray(e[r])?e[r]:[e[r]],...Array.isArray(s)?s:[s]];}return e}function H(n){return typeof n?.entries=="function"}function v(n={}){if(n instanceof Headers)return n;const e=new Headers;for(const[t,r]of Object.entries(n))if(r!==void 0){if(Array.isArray(r)){for(const s of r)e.append(t,String(s));continue}e.set(t,String(r));}return e}const S=new Set([101,204,205,304]);async function b$1(n,e){const t=new y,r=new w$1(t);t.url=e.url?.toString()||"/";let s;if(!t.url.startsWith("/")){const d=new URL(t.url);s=d.host,t.url=d.pathname+d.search+d.hash;}t.method=e.method||"GET",t.headers=R(e.headers||{}),t.headers.host||(t.headers.host=e.host||s||"localhost"),t.connection.encrypted=t.connection.encrypted||e.protocol==="https",t.body=e.body||null,t.__unenv__=e.context,await n(t,r);let a=r._data;(S.has(r.statusCode)||t.method.toUpperCase()==="HEAD")&&(a=null,delete r._headers["content-length"]);const u={status:r.statusCode,statusText:r.statusMessage,headers:r._headers,body:a};return t.destroy(),r.destroy(),u}async function C(n,e,t={}){try{const r=await b$1(n,{url:e,...t});return new Response(r.body,{status:r.status,statusText:r.statusText,headers:v(r.headers)})}catch(r){return new Response(r.toString(),{status:Number.parseInt(r.statusCode||r.code)||500,statusText:r.statusText})}}
-
-function useBase(base, handler) {
-  base = withoutTrailingSlash(base);
-  if (!base || base === "/") {
-    return handler;
-  }
-  return eventHandler(async (event) => {
-    event.node.req.originalUrl = event.node.req.originalUrl || event.node.req.url || "/";
-    const _path = event._path || event.node.req.url || "/";
-    event._path = withoutBase(event.path || "/", base);
-    event.node.req.url = event._path;
-    try {
-      return await handler(event);
-    } finally {
-      event._path = event.node.req.url = _path;
-    }
-  });
-}
+function o(n){throw new Error(`${n} is not implemented yet!`)}let i$1 = class i extends EventEmitter{__unenv__={};readableEncoding=null;readableEnded=true;readableFlowing=false;readableHighWaterMark=0;readableLength=0;readableObjectMode=false;readableAborted=false;readableDidRead=false;closed=false;errored=null;readable=false;destroyed=false;static from(e,t){return new i(t)}constructor(e){super();}_read(e){}read(e){}setEncoding(e){return this}pause(){return this}resume(){return this}isPaused(){return  true}unpipe(e){return this}unshift(e,t){}wrap(e){return this}push(e,t){return  false}_destroy(e,t){this.removeAllListeners();}destroy(e){return this.destroyed=true,this._destroy(e),this}pipe(e,t){return {}}compose(e,t){throw new Error("Method not implemented.")}[Symbol.asyncDispose](){return this.destroy(),Promise.resolve()}async*[Symbol.asyncIterator](){throw o("Readable.asyncIterator")}iterator(e){throw o("Readable.iterator")}map(e,t){throw o("Readable.map")}filter(e,t){throw o("Readable.filter")}forEach(e,t){throw o("Readable.forEach")}reduce(e,t,r){throw o("Readable.reduce")}find(e,t){throw o("Readable.find")}findIndex(e,t){throw o("Readable.findIndex")}some(e,t){throw o("Readable.some")}toArray(e){throw o("Readable.toArray")}every(e,t){throw o("Readable.every")}flatMap(e,t){throw o("Readable.flatMap")}drop(e,t){throw o("Readable.drop")}take(e,t){throw o("Readable.take")}asIndexedPairs(e){throw o("Readable.asIndexedPairs")}};let l$1 = class l extends EventEmitter{__unenv__={};writable=true;writableEnded=false;writableFinished=false;writableHighWaterMark=0;writableLength=0;writableObjectMode=false;writableCorked=0;closed=false;errored=null;writableNeedDrain=false;writableAborted=false;destroyed=false;_data;_encoding="utf8";constructor(e){super();}pipe(e,t){return {}}_write(e,t,r){if(this.writableEnded){r&&r();return}if(this._data===void 0)this._data=e;else {const s=typeof this._data=="string"?Buffer$1.from(this._data,this._encoding||t||"utf8"):this._data,a=typeof e=="string"?Buffer$1.from(e,t||this._encoding||"utf8"):e;this._data=Buffer$1.concat([s,a]);}this._encoding=t,r&&r();}_writev(e,t){}_destroy(e,t){}_final(e){}write(e,t,r){const s=typeof t=="string"?this._encoding:"utf8",a=typeof t=="function"?t:typeof r=="function"?r:void 0;return this._write(e,s,a),true}setDefaultEncoding(e){return this}end(e,t,r){const s=typeof e=="function"?e:typeof t=="function"?t:typeof r=="function"?r:void 0;if(this.writableEnded)return s&&s(),this;const a=e===s?void 0:e;if(a){const u=t===s?void 0:t;this.write(a,u,s);}return this.writableEnded=true,this.writableFinished=true,this.emit("close"),this.emit("finish"),this}cork(){}uncork(){}destroy(e){return this.destroyed=true,delete this._data,this.removeAllListeners(),this}compose(e,t){throw new Error("Method not implemented.")}[Symbol.asyncDispose](){return Promise.resolve()}};const c=class{allowHalfOpen=true;_destroy;constructor(e=new i$1,t=new l$1){Object.assign(this,e),Object.assign(this,t),this._destroy=m(e._destroy,t._destroy);}};function _(){return Object.assign(c.prototype,i$1.prototype),Object.assign(c.prototype,l$1.prototype),c}function m(...n){return function(...e){for(const t of n)t(...e);}}const g=_();class A extends g{__unenv__={};bufferSize=0;bytesRead=0;bytesWritten=0;connecting=false;destroyed=false;pending=false;localAddress="";localPort=0;remoteAddress="";remoteFamily="";remotePort=0;autoSelectFamilyAttemptedAddresses=[];readyState="readOnly";constructor(e){super();}write(e,t,r){return  false}connect(e,t,r){return this}end(e,t,r){return this}setEncoding(e){return this}pause(){return this}resume(){return this}setTimeout(e,t){return this}setNoDelay(e){return this}setKeepAlive(e,t){return this}address(){return {}}unref(){return this}ref(){return this}destroySoon(){this.destroy();}resetAndDestroy(){const e=new Error("ERR_SOCKET_CLOSED");return e.code="ERR_SOCKET_CLOSED",this.destroy(e),this}}class y extends i$1{aborted=false;httpVersion="1.1";httpVersionMajor=1;httpVersionMinor=1;complete=true;connection;socket;headers={};trailers={};method="GET";url="/";statusCode=200;statusMessage="";closed=false;errored=null;readable=false;constructor(e){super(),this.socket=this.connection=e||new A;}get rawHeaders(){const e=this.headers,t=[];for(const r in e)if(Array.isArray(e[r]))for(const s of e[r])t.push(r,s);else t.push(r,e[r]);return t}get rawTrailers(){return []}setTimeout(e,t){return this}get headersDistinct(){return p(this.headers)}get trailersDistinct(){return p(this.trailers)}}function p(n){const e={};for(const[t,r]of Object.entries(n))t&&(e[t]=(Array.isArray(r)?r:[r]).filter(Boolean));return e}class w extends l$1{statusCode=200;statusMessage="";upgrading=false;chunkedEncoding=false;shouldKeepAlive=false;useChunkedEncodingByDefault=false;sendDate=false;finished=false;headersSent=false;strictContentLength=false;connection=null;socket=null;req;_headers={};constructor(e){super(),this.req=e;}assignSocket(e){e._httpMessage=this,this.socket=e,this.connection=e,this.emit("socket",e),this._flush();}_flush(){this.flushHeaders();}detachSocket(e){}writeContinue(e){}writeHead(e,t,r){e&&(this.statusCode=e),typeof t=="string"&&(this.statusMessage=t,t=void 0);const s=r||t;if(s&&!Array.isArray(s))for(const a in s)this.setHeader(a,s[a]);return this.headersSent=true,this}writeProcessing(){}setTimeout(e,t){return this}appendHeader(e,t){e=e.toLowerCase();const r=this._headers[e],s=[...Array.isArray(r)?r:[r],...Array.isArray(t)?t:[t]].filter(Boolean);return this._headers[e]=s.length>1?s:s[0],this}setHeader(e,t){return this._headers[e.toLowerCase()]=t,this}setHeaders(e){for(const[t,r]of Object.entries(e))this.setHeader(t,r);return this}getHeader(e){return this._headers[e.toLowerCase()]}getHeaders(){return this._headers}getHeaderNames(){return Object.keys(this._headers)}hasHeader(e){return e.toLowerCase()in this._headers}removeHeader(e){delete this._headers[e.toLowerCase()];}addTrailers(e){}flushHeaders(){}writeEarlyHints(e,t){typeof t=="function"&&t();}}const E=(()=>{const n=function(){};return n.prototype=Object.create(null),n})();function R(n={}){const e=new E,t=Array.isArray(n)||H(n)?n:Object.entries(n);for(const[r,s]of t)if(s){if(e[r]===void 0){e[r]=s;continue}e[r]=[...Array.isArray(e[r])?e[r]:[e[r]],...Array.isArray(s)?s:[s]];}return e}function H(n){return typeof n?.entries=="function"}function v(n={}){if(n instanceof Headers)return n;const e=new Headers;for(const[t,r]of Object.entries(n))if(r!==void 0){if(Array.isArray(r)){for(const s of r)e.append(t,String(s));continue}e.set(t,String(r));}return e}const S=new Set([101,204,205,304]);async function b(n,e){const t=new y,r=new w(t);t.url=e.url?.toString()||"/";let s;if(!t.url.startsWith("/")){const d=new URL(t.url);s=d.host,t.url=d.pathname+d.search+d.hash;}t.method=e.method||"GET",t.headers=R(e.headers||{}),t.headers.host||(t.headers.host=e.host||s||"localhost"),t.connection.encrypted=t.connection.encrypted||e.protocol==="https",t.body=e.body||null,t.__unenv__=e.context,await n(t,r);let a=r._data;(S.has(r.statusCode)||t.method.toUpperCase()==="HEAD")&&(a=null,delete r._headers["content-length"]);const u={status:r.statusCode,statusText:r.statusMessage,headers:r._headers,body:a};return t.destroy(),r.destroy(),u}async function C(n,e,t={}){try{const r=await b(n,{url:e,...t});return new Response(r.body,{status:r.status,statusText:r.statusText,headers:v(r.headers)})}catch(r){return new Response(r.toString(),{status:Number.parseInt(r.statusCode||r.code)||500,statusText:r.statusText})}}
 
 function hasProp(obj, prop) {
   try {
@@ -2183,7 +2158,7 @@ function createHooks() {
   return new Hookable();
 }
 
-const s$2=globalThis.Headers,i=globalThis.AbortController,l=globalThis.fetch||(()=>{throw new Error("[node-fetch-native] Failed to fetch: `globalThis.fetch` is not available!")});
+const s$1=globalThis.Headers,i=globalThis.AbortController,l=globalThis.fetch||(()=>{throw new Error("[node-fetch-native] Failed to fetch: `globalThis.fetch` is not available!")});
 
 class FetchError extends Error {
   constructor(message, opts) {
@@ -2547,10 +2522,10 @@ function createNodeFetch() {
     return l(input, { ...nodeFetchOptions, ...init });
   };
 }
-const fetch$1 = globalThis.fetch ? (...args) => globalThis.fetch(...args) : createNodeFetch();
-const Headers$1 = globalThis.Headers || s$2;
+const fetch = globalThis.fetch ? (...args) => globalThis.fetch(...args) : createNodeFetch();
+const Headers$1 = globalThis.Headers || s$1;
 const AbortController = globalThis.AbortController || i;
-const ofetch = createFetch({ fetch: fetch$1, Headers: Headers$1, AbortController });
+const ofetch = createFetch({ fetch, Headers: Headers$1, AbortController });
 const $fetch = ofetch;
 
 function wrapToPromise(value) {
@@ -3201,7 +3176,7 @@ function ignoreExists(err) {
   return err.code === "EEXIST" ? null : err;
 }
 async function writeFile(path, data, encoding) {
-  await ensuredir(dirname$1(path));
+  await ensuredir(dirname(path));
   return promises.writeFile(path, data, encoding);
 }
 function readFile(path, encoding) {
@@ -3217,7 +3192,7 @@ async function ensuredir(dir) {
   if (existsSync(dir)) {
     return;
   }
-  await ensuredir(dirname$1(dir)).catch(ignoreExists);
+  await ensuredir(dirname(dir)).catch(ignoreExists);
   await promises.mkdir(dir).catch(ignoreExists);
 }
 async function readdirRecursive(dir, ignore, maxDepth) {
@@ -3228,7 +3203,7 @@ async function readdirRecursive(dir, ignore, maxDepth) {
   const files = [];
   await Promise.all(
     entries.map(async (entry) => {
-      const entryPath = resolve$1(dir, entry.name);
+      const entryPath = resolve(dir, entry.name);
       if (entry.isDirectory()) {
         if (maxDepth === void 0 || maxDepth > 0) {
           const dirFiles = await readdirRecursive(
@@ -3251,7 +3226,7 @@ async function rmRecursive(dir) {
   const entries = await readdir(dir);
   await Promise.all(
     entries.map((entry) => {
-      const entryPath = resolve$1(dir, entry.name);
+      const entryPath = resolve(dir, entry.name);
       if (entry.isDirectory()) {
         return rmRecursive(entryPath).then(() => promises.rmdir(entryPath));
       } else {
@@ -3267,7 +3242,7 @@ const unstorage_47drivers_47fs_45lite = defineDriver((opts = {}) => {
   if (!opts.base) {
     throw createRequiredError(DRIVER_NAME, "base");
   }
-  opts.base = resolve$1(opts.base);
+  opts.base = resolve(opts.base);
   const r = (key) => {
     if (PATH_TRAVERSE_RE.test(key)) {
       throw createError(
@@ -3275,7 +3250,7 @@ const unstorage_47drivers_47fs_45lite = defineDriver((opts = {}) => {
         `Invalid key: ${JSON.stringify(key)}. It should not contain .. segments`
       );
     }
-    const resolved = join$1(opts.base, key.replace(/:/g, "/"));
+    const resolved = join(opts.base, key.replace(/:/g, "/"));
     return resolved;
   };
   return {
@@ -3337,7 +3312,7 @@ function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
 }
 
-const e=globalThis.process?.getBuiltinModule?.("crypto")?.hash,r="sha256",s$1="base64url";function digest(t){if(e)return e(r,t,s$1);const o=createHash(r).update(t);return globalThis.process?.versions?.webcontainer?o.digest().toString(s$1):o.digest(s$1)}
+const e=globalThis.process?.getBuiltinModule?.("crypto")?.hash,r="sha256",s="base64url";function digest(t){if(e)return e(r,t,s);const o=createHash(r).update(t);return globalThis.process?.versions?.webcontainer?o.digest().toString(s):o.digest(s)}
 
 const Hasher = /* @__PURE__ */ (() => {
   class Hasher2 {
@@ -4002,7 +3977,7 @@ function snakeCase(str) {
   return kebabCase(str || "", "_");
 }
 
-function getEnv$1(key, opts) {
+function getEnv(key, opts) {
   const envKey = snakeCase(key).toUpperCase();
   return destr(
     process.env[opts.prefix + envKey] ?? process.env[opts.altPrefix + envKey]
@@ -4014,7 +3989,7 @@ function _isObject(input) {
 function applyEnv(obj, opts, parentKey = "") {
   for (const key in obj) {
     const subKey = parentKey ? `${parentKey}_${key}` : key;
-    const envValue = getEnv$1(subKey, opts);
+    const envValue = getEnv(subKey, opts);
     if (_isObject(obj[key])) {
       if (_isObject(envValue)) {
         obj[key] = { ...obj[key], ...envValue };
@@ -4043,7 +4018,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "92a398ac-35c2-43eb-8e5c-73429487cf2c",
+    "buildId": "71e2b80c-a777-4e14-8a8c-bf8c572ec8c9",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4075,16 +4050,6 @@ const _inlineRuntimeConfig = {
     "apiBase": "http://localhost:5000/api",
     "whatsappNumber": "+201000000000",
     "siteName": "PharmaCare"
-  },
-  "ipx": {
-    "baseURL": "/_ipx",
-    "alias": {},
-    "fs": {
-      "dir": "../../static"
-    },
-    "http": {
-      "domains": []
-    }
   }
 };
 const envOptions = {
@@ -4529,1002 +4494,11 @@ const plugins = [
 
 const _SxA8c9 = defineEventHandler(() => {});
 
-const _DRIVE_LETTER_START_RE = /^[A-Za-z]:\//;
-function normalizeWindowsPath(input = "") {
-  if (!input) {
-    return input;
-  }
-  return input.replace(/\\/g, "/").replace(_DRIVE_LETTER_START_RE, (r) => r.toUpperCase());
-}
-
-const _UNC_REGEX = /^[/\\]{2}/;
-const _IS_ABSOLUTE_RE$1 = /^[/\\](?![/\\])|^[/\\]{2}(?!\.)|^[A-Za-z]:[/\\]/;
-const _DRIVE_LETTER_RE = /^[A-Za-z]:$/;
-const normalize$1 = function(path) {
-  if (path.length === 0) {
-    return ".";
-  }
-  path = normalizeWindowsPath(path);
-  const isUNCPath = path.match(_UNC_REGEX);
-  const isPathAbsolute = isAbsolute$1(path);
-  const trailingSeparator = path[path.length - 1] === "/";
-  path = normalizeString(path, !isPathAbsolute);
-  if (path.length === 0) {
-    if (isPathAbsolute) {
-      return "/";
-    }
-    return trailingSeparator ? "./" : ".";
-  }
-  if (trailingSeparator) {
-    path += "/";
-  }
-  if (_DRIVE_LETTER_RE.test(path)) {
-    path += "/";
-  }
-  if (isUNCPath) {
-    if (!isPathAbsolute) {
-      return `//./${path}`;
-    }
-    return `//${path}`;
-  }
-  return isPathAbsolute && !isAbsolute$1(path) ? `/${path}` : path;
-};
-const join = function(...arguments_) {
-  if (arguments_.length === 0) {
-    return ".";
-  }
-  let joined;
-  for (const argument of arguments_) {
-    if (argument && argument.length > 0) {
-      if (joined === void 0) {
-        joined = argument;
-      } else {
-        joined += `/${argument}`;
-      }
-    }
-  }
-  if (joined === void 0) {
-    return ".";
-  }
-  return normalize$1(joined.replace(/\/\/+/g, "/"));
-};
-function cwd() {
-  if (typeof process !== "undefined" && typeof process.cwd === "function") {
-    return process.cwd().replace(/\\/g, "/");
-  }
-  return "/";
-}
-const resolve = function(...arguments_) {
-  arguments_ = arguments_.map((argument) => normalizeWindowsPath(argument));
-  let resolvedPath = "";
-  let resolvedAbsolute = false;
-  for (let index = arguments_.length - 1; index >= -1 && !resolvedAbsolute; index--) {
-    const path = index >= 0 ? arguments_[index] : cwd();
-    if (!path || path.length === 0) {
-      continue;
-    }
-    resolvedPath = `${path}/${resolvedPath}`;
-    resolvedAbsolute = isAbsolute$1(path);
-  }
-  resolvedPath = normalizeString(resolvedPath, !resolvedAbsolute);
-  if (resolvedAbsolute && !isAbsolute$1(resolvedPath)) {
-    return `/${resolvedPath}`;
-  }
-  return resolvedPath.length > 0 ? resolvedPath : ".";
-};
-function normalizeString(path, allowAboveRoot) {
-  let res = "";
-  let lastSegmentLength = 0;
-  let lastSlash = -1;
-  let dots = 0;
-  let char = null;
-  for (let index = 0; index <= path.length; ++index) {
-    if (index < path.length) {
-      char = path[index];
-    } else if (char === "/") {
-      break;
-    } else {
-      char = "/";
-    }
-    if (char === "/") {
-      if (lastSlash === index - 1 || dots === 1) ; else if (dots === 2) {
-        if (res.length < 2 || lastSegmentLength !== 2 || res[res.length - 1] !== "." || res[res.length - 2] !== ".") {
-          if (res.length > 2) {
-            const lastSlashIndex = res.lastIndexOf("/");
-            if (lastSlashIndex === -1) {
-              res = "";
-              lastSegmentLength = 0;
-            } else {
-              res = res.slice(0, lastSlashIndex);
-              lastSegmentLength = res.length - 1 - res.lastIndexOf("/");
-            }
-            lastSlash = index;
-            dots = 0;
-            continue;
-          } else if (res.length > 0) {
-            res = "";
-            lastSegmentLength = 0;
-            lastSlash = index;
-            dots = 0;
-            continue;
-          }
-        }
-        if (allowAboveRoot) {
-          res += res.length > 0 ? "/.." : "..";
-          lastSegmentLength = 2;
-        }
-      } else {
-        if (res.length > 0) {
-          res += `/${path.slice(lastSlash + 1, index)}`;
-        } else {
-          res = path.slice(lastSlash + 1, index);
-        }
-        lastSegmentLength = index - lastSlash - 1;
-      }
-      lastSlash = index;
-      dots = 0;
-    } else if (char === "." && dots !== -1) {
-      ++dots;
-    } else {
-      dots = -1;
-    }
-  }
-  return res;
-}
-const isAbsolute$1 = function(p) {
-  return _IS_ABSOLUTE_RE$1.test(p);
-};
-const _EXTNAME_RE = /.(\.[^./]+)$/;
-const extname = function(p) {
-  const match = _EXTNAME_RE.exec(normalizeWindowsPath(p));
-  return match && match[1] || "";
-};
-const dirname = function(p) {
-  const segments = normalizeWindowsPath(p).replace(/\/$/, "").split("/").slice(0, -1);
-  if (segments.length === 1 && _DRIVE_LETTER_RE.test(segments[0])) {
-    segments[0] += "/";
-  }
-  return segments.join("/") || (isAbsolute$1(p) ? "/" : ".");
-};
-const basename = function(p, extension) {
-  const lastSegment = normalizeWindowsPath(p).split("/").pop();
-  return extension && lastSegment.endsWith(extension) ? lastSegment.slice(0, -extension.length) : lastSegment;
-};
-const parse = function(p) {
-  const root = normalizeWindowsPath(p).split("/").shift() || "/";
-  const base = basename(p);
-  const extension = extname(base);
-  return {
-    root,
-    dir: dirname(p),
-    base,
-    ext: extension,
-    name: base.slice(0, base.length - extension.length)
-  };
-};
-
-const Handlers = {
-  __proto__: null,
-  get b () { return b; },
-  get background () { return background; },
-  get blur () { return blur; },
-  get crop () { return crop; },
-  get enlarge () { return enlarge; },
-  get extend () { return extend; },
-  get extract () { return extract; },
-  get fit () { return fit; },
-  get flatten () { return flatten; },
-  get flip () { return flip; },
-  get flop () { return flop; },
-  get gamma () { return gamma; },
-  get grayscale () { return grayscale; },
-  get h () { return h; },
-  get height () { return height; },
-  get kernel () { return kernel; },
-  get median () { return median; },
-  get modulate () { return modulate; },
-  get negate () { return negate; },
-  get normalize () { return normalize; },
-  get pos () { return pos; },
-  get position () { return position; },
-  get q () { return q; },
-  get quality () { return quality; },
-  get resize () { return resize; },
-  get rotate () { return rotate; },
-  get s () { return s; },
-  get sharpen () { return sharpen; },
-  get threshold () { return threshold; },
-  get tint () { return tint; },
-  get trim () { return trim; },
-  get w () { return w; },
-  get width () { return width; }
-};
-
-function VArg(argument) {
-  return destr(argument);
-}
-function parseArgs(arguments_, mappers) {
-  const vargs = arguments_.split("_");
-  return mappers.map((v, index) => v(vargs[index]));
-}
-function getHandler(key) {
-  return Handlers[key];
-}
-function applyHandler(context, pipe, handler, argumentsString) {
-  const arguments_ = handler.args ? parseArgs(argumentsString, handler.args) : [];
-  return handler.apply(context, pipe, ...arguments_);
-}
-function clampDimensionsPreservingAspectRatio(sourceDimensions, desiredDimensions) {
-  const desiredAspectRatio = desiredDimensions.width / desiredDimensions.height;
-  let { width, height } = desiredDimensions;
-  if (sourceDimensions.width && width > sourceDimensions.width) {
-    width = sourceDimensions.width;
-    height = Math.round(sourceDimensions.width / desiredAspectRatio);
-  }
-  if (sourceDimensions.height && height > sourceDimensions.height) {
-    height = sourceDimensions.height;
-    width = Math.round(sourceDimensions.height * desiredAspectRatio);
-  }
-  return { width, height };
-}
-
-const quality = {
-  args: [VArg],
-  order: -1,
-  apply: (context, _pipe, quality2) => {
-    context.quality = quality2;
-  }
-};
-const fit = {
-  args: [VArg],
-  order: -1,
-  apply: (context, _pipe, fit2) => {
-    context.fit = fit2;
-  }
-};
-const position = {
-  args: [VArg],
-  order: -1,
-  apply: (context, _pipe, position2) => {
-    context.position = position2;
-  }
-};
-const HEX_RE = /^([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i;
-const SHORTHEX_RE = /^([\da-f])([\da-f])([\da-f])$/i;
-const background = {
-  args: [VArg],
-  order: -1,
-  apply: (context, _pipe, background2) => {
-    background2 = String(background2);
-    if (!background2.startsWith("#") && (HEX_RE.test(background2) || SHORTHEX_RE.test(background2))) {
-      background2 = "#" + background2;
-    }
-    context.background = background2;
-  }
-};
-const enlarge = {
-  args: [],
-  apply: (context) => {
-    context.enlarge = true;
-  }
-};
-const kernel = {
-  args: [VArg],
-  apply: (context, _pipe, kernel2) => {
-    context.kernel = kernel2;
-  }
-};
-const width = {
-  args: [VArg],
-  apply: (context, pipe, width2) => {
-    return pipe.resize(width2, void 0, {
-      withoutEnlargement: !context.enlarge
-    });
-  }
-};
-const height = {
-  args: [VArg],
-  apply: (context, pipe, height2) => {
-    return pipe.resize(void 0, height2, {
-      withoutEnlargement: !context.enlarge
-    });
-  }
-};
-const resize = {
-  args: [VArg, VArg, VArg],
-  apply: (context, pipe, size) => {
-    let [width2, height2] = String(size).split("x").map(Number);
-    if (!width2) {
-      return;
-    }
-    if (!height2) {
-      height2 = width2;
-    }
-    if (!context.enlarge) {
-      const clamped = clampDimensionsPreservingAspectRatio(context.meta, {
-        width: width2,
-        height: height2
-      });
-      width2 = clamped.width;
-      height2 = clamped.height;
-    }
-    return pipe.resize(width2, height2, {
-      fit: context.fit,
-      position: context.position,
-      background: context.background,
-      kernel: context.kernel
-    });
-  }
-};
-const trim = {
-  args: [VArg],
-  apply: (_context, pipe, threshold2) => {
-    return pipe.trim(threshold2);
-  }
-};
-const extend = {
-  args: [VArg, VArg, VArg, VArg],
-  apply: (context, pipe, top, right, bottom, left) => {
-    return pipe.extend({
-      top,
-      left,
-      bottom,
-      right,
-      background: context.background
-    });
-  }
-};
-const extract = {
-  args: [VArg, VArg, VArg, VArg],
-  apply: (_context, pipe, left, top, width2, height2) => {
-    return pipe.extract({
-      left,
-      top,
-      width: width2,
-      height: height2
-    });
-  }
-};
-const rotate = {
-  args: [VArg],
-  apply: (context, pipe, angel) => {
-    return pipe.rotate(angel, {
-      background: context.background
-    });
-  }
-};
-const flip = {
-  args: [],
-  apply: (_context, pipe) => {
-    return pipe.flip();
-  }
-};
-const flop = {
-  args: [],
-  apply: (_context, pipe) => {
-    return pipe.flop();
-  }
-};
-const sharpen = {
-  args: [VArg, VArg, VArg],
-  apply: (_context, pipe, sigma, flat, jagged) => {
-    return pipe.sharpen(sigma, flat, jagged);
-  }
-};
-const median = {
-  args: [VArg, VArg, VArg],
-  apply: (_context, pipe, size) => {
-    return pipe.median(size);
-  }
-};
-const blur = {
-  args: [VArg, VArg, VArg],
-  apply: (_context, pipe, sigma) => {
-    return pipe.blur(sigma);
-  }
-};
-const flatten = {
-  args: [VArg, VArg, VArg],
-  apply: (context, pipe) => {
-    return pipe.flatten({
-      background: context.background
-    });
-  }
-};
-const gamma = {
-  args: [VArg, VArg, VArg],
-  apply: (_context, pipe, gamma2, gammaOut) => {
-    return pipe.gamma(gamma2, gammaOut);
-  }
-};
-const negate = {
-  args: [VArg, VArg, VArg],
-  apply: (_context, pipe) => {
-    return pipe.negate();
-  }
-};
-const normalize = {
-  args: [VArg, VArg, VArg],
-  apply: (_context, pipe) => {
-    return pipe.normalize();
-  }
-};
-const threshold = {
-  args: [VArg],
-  apply: (_context, pipe, threshold2) => {
-    return pipe.threshold(threshold2);
-  }
-};
-const modulate = {
-  args: [VArg],
-  apply: (_context, pipe, brightness, saturation, hue) => {
-    return pipe.modulate({
-      brightness,
-      saturation,
-      hue
-    });
-  }
-};
-const tint = {
-  args: [VArg],
-  apply: (_context, pipe, rgb) => {
-    return pipe.tint(rgb);
-  }
-};
-const grayscale = {
-  args: [VArg],
-  apply: (_context, pipe) => {
-    return pipe.grayscale();
-  }
-};
-const crop = extract;
-const q = quality;
-const b = background;
-const w = width;
-const h = height;
-const s = resize;
-const pos = position;
-
-function getEnv(name) {
-  return name in process.env ? destr(process.env[name]) : void 0;
-}
-function cachedPromise(function_) {
-  let p;
-  return (...arguments_) => {
-    if (p) {
-      return p;
-    }
-    p = Promise.resolve(function_(...arguments_));
-    return p;
-  };
-}
-
-const SUPPORTED_FORMATS = /* @__PURE__ */ new Set([
-  "jpeg",
-  "png",
-  "webp",
-  "avif",
-  "tiff",
-  "heif",
-  "gif",
-  "heic"
-]);
-function createIPX(userOptions) {
-  const options = defu(userOptions, {
-    alias: getEnv("IPX_ALIAS") || {},
-    maxAge: getEnv("IPX_MAX_AGE") ?? 60,
-    sharpOptions: {
-      jpegProgressive: true
-    }
-  });
-  options.alias = Object.fromEntries(
-    Object.entries(options.alias || {}).map((e) => [
-      withLeadingSlash(e[0]),
-      e[1]
-    ])
-  );
-  const getSharp = cachedPromise(async () => {
-    return await import('sharp').then(
-      (r) => r.default || r
-    );
-  });
-  const getSVGO = cachedPromise(async () => {
-    const { optimize } = await import('svgo');
-    return { optimize };
-  });
-  return function ipx(id, modifiers = {}, opts = {}) {
-    if (!id) {
-      throw createError$1({
-        statusCode: 400,
-        statusText: `IPX_MISSING_ID`,
-        message: `Resource id is missing`
-      });
-    }
-    id = hasProtocol(id) ? id : withLeadingSlash(id);
-    for (const base in options.alias) {
-      if (id.startsWith(base)) {
-        id = joinURL(options.alias[base], id.slice(base.length));
-      }
-    }
-    const storage = hasProtocol(id) ? options.httpStorage || options.storage : options.storage || options.httpStorage;
-    if (!storage) {
-      throw createError$1({
-        statusCode: 500,
-        statusText: `IPX_NO_STORAGE`,
-        message: "No storage configured!"
-      });
-    }
-    const getSourceMeta = cachedPromise(async () => {
-      const sourceMeta = await storage.getMeta(id, opts);
-      if (!sourceMeta) {
-        throw createError$1({
-          statusCode: 404,
-          statusText: `IPX_RESOURCE_NOT_FOUND`,
-          message: `Resource not found: ${id}`
-        });
-      }
-      const _maxAge = sourceMeta.maxAge ?? options.maxAge;
-      return {
-        maxAge: typeof _maxAge === "string" ? Number.parseInt(_maxAge) : _maxAge,
-        mtime: sourceMeta.mtime ? new Date(sourceMeta.mtime) : void 0
-      };
-    });
-    const getSourceData = cachedPromise(async () => {
-      const sourceData = await storage.getData(id, opts);
-      if (!sourceData) {
-        throw createError$1({
-          statusCode: 404,
-          statusText: `IPX_RESOURCE_NOT_FOUND`,
-          message: `Resource not found: ${id}`
-        });
-      }
-      return Buffer.from(sourceData);
-    });
-    const process = cachedPromise(async () => {
-      const sourceData = await getSourceData();
-      let imageMeta$1;
-      try {
-        imageMeta$1 = imageMeta(sourceData);
-      } catch {
-        throw createError$1({
-          statusCode: 400,
-          statusText: `IPX_INVALID_IMAGE`,
-          message: `Cannot parse image metadata: ${id}`
-        });
-      }
-      let mFormat = modifiers.f || modifiers.format;
-      if (mFormat === "jpg") {
-        mFormat = "jpeg";
-      }
-      const format = mFormat && SUPPORTED_FORMATS.has(mFormat) ? mFormat : SUPPORTED_FORMATS.has(imageMeta$1.type || "") ? imageMeta$1.type : "jpeg";
-      if (imageMeta$1.type === "svg" && !mFormat) {
-        if (options.svgo === false) {
-          return {
-            data: sourceData,
-            format: "svg+xml",
-            meta: imageMeta$1
-          };
-        } else {
-          const { optimize } = await getSVGO();
-          const svg = optimize(sourceData.toString("utf8"), {
-            ...options.svgo,
-            plugins: ["removeScriptElement", ...options.svgo?.plugins || []]
-          }).data;
-          return {
-            data: svg,
-            format: "svg+xml",
-            meta: imageMeta$1
-          };
-        }
-      }
-      const animated = modifiers.animated !== void 0 || modifiers.a !== void 0 || format === "gif";
-      const Sharp = await getSharp();
-      let sharp = Sharp(sourceData, { animated, ...options.sharpOptions });
-      Object.assign(
-        sharp.options,
-        options.sharpOptions
-      );
-      const handlers = Object.entries(modifiers).map(([name, arguments_]) => ({
-        handler: getHandler(name),
-        name,
-        args: arguments_
-      })).filter((h) => h.handler).sort((a, b) => {
-        const aKey = (a.handler.order || a.name || "").toString();
-        const bKey = (b.handler.order || b.name || "").toString();
-        return aKey.localeCompare(bKey);
-      });
-      const handlerContext = { meta: imageMeta$1 };
-      for (const h of handlers) {
-        sharp = applyHandler(handlerContext, sharp, h.handler, h.args) || sharp;
-      }
-      if (SUPPORTED_FORMATS.has(format || "")) {
-        sharp = sharp.toFormat(format, {
-          quality: handlerContext.quality
-        });
-      }
-      const processedImage = await sharp.toBuffer();
-      return {
-        data: processedImage,
-        format,
-        meta: imageMeta$1
-      };
-    });
-    return {
-      getSourceMeta,
-      process
-    };
-  };
-}
-
-const MODIFIER_SEP = /[&,]/g;
-const MODIFIER_VAL_SEP = /[:=_]/;
-function createIPXH3Handler(ipx) {
-  const _handler = async (event) => {
-    const [modifiersString = "", ...idSegments] = event.path.slice(
-      1
-      /* leading slash */
-    ).split("/");
-    const id = safeString(decode(idSegments.join("/")));
-    if (!modifiersString) {
-      throw createError$1({
-        statusCode: 400,
-        statusText: `IPX_MISSING_MODIFIERS`,
-        message: `Modifiers are missing: ${id}`
-      });
-    }
-    if (!id || id === "/") {
-      throw createError$1({
-        statusCode: 400,
-        statusText: `IPX_MISSING_ID`,
-        message: `Resource id is missing: ${event.path}`
-      });
-    }
-    const modifiers = /* @__PURE__ */ Object.create(null);
-    if (modifiersString !== "_") {
-      for (const p of modifiersString.split(MODIFIER_SEP)) {
-        const [key, ...values] = p.split(MODIFIER_VAL_SEP);
-        modifiers[safeString(key)] = values.map((v) => safeString(decode(v))).join("_");
-      }
-    }
-    const mFormat = modifiers.f || modifiers.format;
-    if (mFormat === "auto") {
-      const acceptHeader = getRequestHeader(event, "accept") || "";
-      const autoFormat = autoDetectFormat(
-        acceptHeader,
-        !!(modifiers.a || modifiers.animated)
-      );
-      delete modifiers.f;
-      delete modifiers.format;
-      if (autoFormat) {
-        modifiers.format = autoFormat;
-        appendResponseHeader(event, "vary", "Accept");
-      }
-    }
-    const img = ipx(id, modifiers);
-    const sourceMeta = await img.getSourceMeta();
-    sendResponseHeaderIfNotSet(
-      event,
-      "content-security-policy",
-      "default-src 'none'"
-    );
-    if (sourceMeta.mtime) {
-      sendResponseHeaderIfNotSet(
-        event,
-        "last-modified",
-        sourceMeta.mtime.toUTCString()
-      );
-      const _ifModifiedSince = getRequestHeader(event, "if-modified-since");
-      if (_ifModifiedSince && new Date(_ifModifiedSince) >= sourceMeta.mtime) {
-        setResponseStatus(event, 304);
-        return send(event);
-      }
-    }
-    const { data, format } = await img.process();
-    if (typeof sourceMeta.maxAge === "number") {
-      sendResponseHeaderIfNotSet(
-        event,
-        "cache-control",
-        `max-age=${+sourceMeta.maxAge}, public, s-maxage=${+sourceMeta.maxAge}`
-      );
-    }
-    const etag = getEtag(data);
-    sendResponseHeaderIfNotSet(event, "etag", etag);
-    if (etag && getRequestHeader(event, "if-none-match") === etag) {
-      setResponseStatus(event, 304);
-      return send(event);
-    }
-    if (format) {
-      sendResponseHeaderIfNotSet(event, "content-type", `image/${format}`);
-    }
-    return data;
-  };
-  return defineEventHandler(async (event) => {
-    try {
-      return await _handler(event);
-    } catch (_error) {
-      const error = createError$1(_error);
-      setResponseStatus(event, error.statusCode, error.statusMessage);
-      return {
-        error: {
-          message: `[${error.statusCode}] [${error.statusMessage || "IPX_ERROR"}] ${error.message}`
-        }
-      };
-    }
-  });
-}
-function sendResponseHeaderIfNotSet(event, name, value) {
-  if (!getResponseHeader(event, name)) {
-    setResponseHeader(event, name, value);
-  }
-}
-function autoDetectFormat(acceptHeader, animated) {
-  if (animated) {
-    const acceptMime2 = negotiate(acceptHeader, ["image/webp", "image/gif"]);
-    return acceptMime2?.split("/")[1] || "gif";
-  }
-  const acceptMime = negotiate(acceptHeader, [
-    "image/avif",
-    "image/webp",
-    "image/jpeg",
-    "image/png",
-    "image/tiff",
-    "image/heif",
-    "image/gif"
-  ]);
-  return acceptMime?.split("/")[1] || "jpeg";
-}
-function safeString(input) {
-  return JSON.stringify(input).replace(/^"|"$/g, "").replace(/\\+/g, "\\").replace(/\\"/g, '"');
-}
-
-const HTTP_RE = /^https?:\/\//;
-function ipxHttpStorage(_options = {}) {
-  const allowAllDomains = _options.allowAllDomains ?? getEnv("IPX_HTTP_ALLOW_ALL_DOMAINS") ?? false;
-  let _domains = _options.domains || getEnv("IPX_HTTP_DOMAINS") || [];
-  const defaultMaxAge = _options.maxAge || getEnv("IPX_HTTP_MAX_AGE") || 300;
-  const fetchOptions = _options.fetchOptions || getEnv("IPX_HTTP_FETCH_OPTIONS") || {};
-  if (typeof _domains === "string") {
-    _domains = _domains.split(",").map((s) => s.trim());
-  }
-  const domains = new Set(
-    _domains.map((d) => {
-      if (!HTTP_RE.test(d)) {
-        d = "http://" + d;
-      }
-      return new URL(d).hostname;
-    }).filter(Boolean)
-  );
-  function validateId(id) {
-    const url = new URL(decodeURIComponent(id));
-    if (!url.hostname) {
-      throw createError$1({
-        statusCode: 403,
-        statusText: `IPX_MISSING_HOSTNAME`,
-        message: `Hostname is missing: ${id}`
-      });
-    }
-    if (!allowAllDomains && !domains.has(url.hostname)) {
-      throw createError$1({
-        statusCode: 403,
-        statusText: `IPX_FORBIDDEN_HOST`,
-        message: `Forbidden host: ${url.hostname}`
-      });
-    }
-    return url.toString();
-  }
-  function parseResponse(response) {
-    let maxAge = defaultMaxAge;
-    if (_options.ignoreCacheControl) {
-      const _cacheControl = response.headers.get("cache-control");
-      if (_cacheControl) {
-        const m = _cacheControl.match(/max-age=(\d+)/);
-        if (m && m[1]) {
-          maxAge = Number.parseInt(m[1]);
-        }
-      }
-    }
-    let mtime;
-    const _lastModified = response.headers.get("last-modified");
-    if (_lastModified) {
-      mtime = new Date(_lastModified);
-    }
-    return { maxAge, mtime };
-  }
-  return {
-    name: "ipx:http",
-    async getMeta(id) {
-      const url = validateId(id);
-      try {
-        const response = await ofetch.raw(url, {
-          ...fetchOptions,
-          method: "HEAD"
-        });
-        const { maxAge, mtime } = parseResponse(response);
-        return { mtime, maxAge };
-      } catch {
-        return {};
-      }
-    },
-    async getData(id) {
-      const url = validateId(id);
-      const response = await ofetch(url, {
-        ...fetchOptions,
-        method: "GET",
-        responseType: "arrayBuffer"
-      });
-      return response;
-    }
-  };
-}
-
-function ipxFSStorage(_options = {}) {
-  const dirs = resolveDirs(_options.dir);
-  const maxAge = _options.maxAge || getEnv("IPX_FS_MAX_AGE");
-  const _getFS = cachedPromise(
-    () => import('node:fs/promises').catch(() => {
-      throw createError$1({
-        statusCode: 500,
-        statusText: `IPX_FILESYSTEM_ERROR`,
-        message: `Failed to resolve filesystem module`
-      });
-    })
-  );
-  const resolveFile = async (id) => {
-    const fs = await _getFS();
-    for (const dir of dirs) {
-      const filePath = join(dir, id);
-      if (!isValidPath(filePath) || !filePath.startsWith(dir + "/")) {
-        throw createError$1({
-          statusCode: 403,
-          statusText: `IPX_FORBIDDEN_PATH`,
-          message: `Forbidden path: ${id}`
-        });
-      }
-      try {
-        const stats = await fs.stat(filePath);
-        if (!stats.isFile()) {
-          continue;
-        }
-        return {
-          stats,
-          read: () => fs.readFile(filePath)
-        };
-      } catch (error) {
-        if (error.code === "ENOENT") {
-          continue;
-        }
-        throw createError$1({
-          statusCode: 403,
-          statusText: `IPX_FORBIDDEN_FILE`,
-          message: `Cannot access file: ${id}`
-        });
-      }
-    }
-    throw createError$1({
-      statusCode: 404,
-      statusText: `IPX_FILE_NOT_FOUND`,
-      message: `File not found: ${id}`
-    });
-  };
-  return {
-    name: "ipx:node-fs",
-    async getMeta(id) {
-      const { stats } = await resolveFile(id);
-      return {
-        mtime: stats.mtime,
-        maxAge
-      };
-    },
-    async getData(id) {
-      const { read } = await resolveFile(id);
-      return read();
-    }
-  };
-}
-const isWindows = process.platform === "win32";
-function isValidPath(fp) {
-  if (isWindows) {
-    fp = fp.slice(parse(fp).root.length);
-  }
-  if (/["*:<>?|]/.test(fp)) {
-    return false;
-  }
-  return true;
-}
-function resolveDirs(dirs) {
-  if (!dirs || !Array.isArray(dirs)) {
-    const dir = resolve(dirs || getEnv("IPX_FS_DIR") || ".");
-    return [dir];
-  }
-  return dirs.map((dirs2) => resolve(dirs2));
-}
-
-const _IS_ABSOLUTE_RE = /^[/\\](?![/\\])|^[/\\]{2}(?!\.)|^[A-Za-z]:[/\\]/;
-const isAbsolute = function(p) {
-  return _IS_ABSOLUTE_RE.test(p);
-};
-
-function defineRenderHandler(render) {
-  const runtimeConfig = useRuntimeConfig();
-  return eventHandler(async (event) => {
-    const nitroApp = useNitroApp();
-    const ctx = { event, render, response: void 0 };
-    await nitroApp.hooks.callHook("render:before", ctx);
-    if (!ctx.response) {
-      if (event.path === `${runtimeConfig.app.baseURL}favicon.ico`) {
-        setResponseHeader(event, "Content-Type", "image/x-icon");
-        return send(
-          event,
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-        );
-      }
-      ctx.response = await ctx.render(event);
-      if (!ctx.response) {
-        const _currentStatus = getResponseStatus(event);
-        setResponseStatus(event, _currentStatus === 200 ? 500 : _currentStatus);
-        return send(
-          event,
-          "No response returned from render handler: " + event.path
-        );
-      }
-    }
-    await nitroApp.hooks.callHook("render:response", ctx.response, ctx);
-    if (ctx.response.headers) {
-      setResponseHeaders(event, ctx.response.headers);
-    }
-    if (ctx.response.statusCode || ctx.response.statusMessage) {
-      setResponseStatus(
-        event,
-        ctx.response.statusCode,
-        ctx.response.statusMessage
-      );
-    }
-    return ctx.response.body;
-  });
-}
-
-function baseURL() {
-	
-	return useRuntimeConfig().app.baseURL;
-}
-function buildAssetsDir() {
-	
-	return useRuntimeConfig().app.buildAssetsDir;
-}
-function buildAssetsURL(...path) {
-	return joinRelativeURL(publicAssetsURL(), buildAssetsDir(), ...path);
-}
-function publicAssetsURL(...path) {
-	
-	const app = useRuntimeConfig().app;
-	const publicBase = app.cdnURL || app.baseURL;
-	return path.length ? joinRelativeURL(publicBase, ...path) : publicBase;
-}
-
-const _di1iVn = lazyEventHandler(() => {
-  const opts = useRuntimeConfig().ipx || {};
-  const fsDir = opts?.fs?.dir ? (Array.isArray(opts.fs.dir) ? opts.fs.dir : [opts.fs.dir]).map((dir) => isAbsolute(dir) ? dir : fileURLToPath(new URL(dir, globalThis._importMeta_.url))) : void 0;
-  const fsStorage = opts.fs?.dir ? ipxFSStorage({ ...opts.fs, dir: fsDir }) : void 0;
-  const httpStorage = opts.http?.domains ? ipxHttpStorage({ ...opts.http }) : void 0;
-  if (!fsStorage && !httpStorage) {
-    throw new Error("IPX storage is not configured!");
-  }
-  const ipxOptions = {
-    ...opts,
-    storage: fsStorage || httpStorage,
-    httpStorage
-  };
-  const ipx = createIPX(ipxOptions);
-  const ipxHandler = createIPXH3Handler(ipx);
-  return useBase(opts.baseURL, ipxHandler);
-});
-
 const _lazy_zUGLjN = () => import('../routes/renderer.mjs').then(function (n) { return n.r; });
 
 const handlers = [
   { route: '/__nuxt_error', handler: _lazy_zUGLjN, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
-  { route: '/_ipx/**', handler: _di1iVn, lazy: false, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_zUGLjN, lazy: true, middleware: false, method: undefined }
 ];
 
@@ -5600,7 +4574,7 @@ function createNitroApp() {
     preemptive: true
   });
   const nodeHandler = toNodeListener(h3App);
-  const localCall = (aRequest) => b$1(
+  const localCall = (aRequest) => b(
     nodeHandler,
     aRequest
   );
@@ -5669,5 +4643,44 @@ function useNitroApp() {
 }
 runNitroPlugins(nitroApp);
 
-export { $fetch as $, useNitroApp as A, useRuntimeConfig as B, withLeadingSlash as C, withQuery as D, withTrailingSlash as E, withoutTrailingSlash as F, buildAssetsURL as a, baseURL as b, createError$1 as c, createHooks as d, decodePath as e, defineRenderHandler as f, defu as g, defuFn as h, encodeParam as i, encodePath as j, executeAsync as k, getContext as l, getQuery as m, getResponseStatus as n, getResponseStatusText as o, getRouteRules as p, getRouteRulesForPath as q, hasProtocol as r, isScriptProtocol as s, joinURL as t, klona as u, parseQuery as v, parseURL as w, publicAssetsURL as x, sanitizeStatusCode as y, toNodeListener as z };
+function defineRenderHandler(render) {
+  const runtimeConfig = useRuntimeConfig();
+  return eventHandler(async (event) => {
+    const nitroApp = useNitroApp();
+    const ctx = { event, render, response: void 0 };
+    await nitroApp.hooks.callHook("render:before", ctx);
+    if (!ctx.response) {
+      if (event.path === `${runtimeConfig.app.baseURL}favicon.ico`) {
+        setResponseHeader(event, "Content-Type", "image/x-icon");
+        return send(
+          event,
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        );
+      }
+      ctx.response = await ctx.render(event);
+      if (!ctx.response) {
+        const _currentStatus = getResponseStatus(event);
+        setResponseStatus(event, _currentStatus === 200 ? 500 : _currentStatus);
+        return send(
+          event,
+          "No response returned from render handler: " + event.path
+        );
+      }
+    }
+    await nitroApp.hooks.callHook("render:response", ctx.response, ctx);
+    if (ctx.response.headers) {
+      setResponseHeaders(event, ctx.response.headers);
+    }
+    if (ctx.response.statusCode || ctx.response.statusMessage) {
+      setResponseStatus(
+        event,
+        ctx.response.statusCode,
+        ctx.response.statusMessage
+      );
+    }
+    return ctx.response.body;
+  });
+}
+
+export { $fetch as $, withTrailingSlash as A, withoutTrailingSlash as B, createHooks as a, defineRenderHandler as b, createError$1 as c, decodePath as d, defu as e, defuFn as f, encodePath as g, executeAsync as h, getContext as i, getQuery as j, getResponseStatus as k, getResponseStatusText as l, getRouteRules as m, getRouteRulesForPath as n, hasProtocol as o, isScriptProtocol as p, joinRelativeURL as q, joinURL as r, klona as s, parseQuery as t, parseURL as u, sanitizeStatusCode as v, toNodeListener as w, useNitroApp as x, useRuntimeConfig as y, withQuery as z };
 //# sourceMappingURL=nitro.mjs.map

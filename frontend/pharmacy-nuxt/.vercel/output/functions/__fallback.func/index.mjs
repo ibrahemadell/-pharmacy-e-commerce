@@ -1,12 +1,8 @@
-import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { v as parseQuery, q as getRouteRulesForPath, D as withQuery, z as toNodeListener, A as useNitroApp } from './chunks/_/nitro.mjs';
+import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { t as parseQuery, n as getRouteRulesForPath, z as withQuery, w as toNodeListener, x as useNitroApp } from './chunks/_/nitro.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:events';
 import 'node:buffer';
-import 'node:url';
-import 'image-meta';
-import '@fastify/accept-negotiator';
-import 'etag';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';

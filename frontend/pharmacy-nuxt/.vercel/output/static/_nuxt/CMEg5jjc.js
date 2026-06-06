@@ -1,1 +1,0 @@
-import{o as i,R as a,x as e}from"./B3aPGi4T.js";const r=i(()=>{const t=a();if(t.initFromStorage(),!t.isAuthenticated)return e("/auth/login");if(!t.isAdmin&&!t.isPharmacist)return e("/")});export{r as default};

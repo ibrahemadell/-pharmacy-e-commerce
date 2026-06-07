@@ -1,0 +1,23 @@
+# Nuxt build outputs
+.output
+.nuxt
+
+# Vercel build output — Vercel builds this from scratch, do NOT commit
+.vercel/output
+.vercel/output
+
+# Node modules
+node_modules
+
+# Logs
+*.log
+preview.log
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# OS files
+.DS_Store
+Thumbs.db

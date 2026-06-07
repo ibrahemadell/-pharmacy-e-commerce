@@ -59,7 +59,20 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   nitro: {
-    preset: 'vercel',
+    // Let Vercel auto-detect the preset; explicitly setting it can interfere with build detection
+    // preset: 'vercel', // removed — Vercel sets this automatically
+    externals: {
+      // Force-bundle these packages into the serverless function so they are always available
+      inline: [
+        'vue-bundle-renderer',
+        '@vue/shared',
+        '@vue/runtime-core',
+        '@vue/reactivity',
+        '@vue/runtime-dom',
+        '@unhead/vue',
+        '@unhead/shared',
+      ],
+    },
   },
 
   compatibilityDate: '2024-01-01',
